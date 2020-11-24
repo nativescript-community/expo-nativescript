@@ -1,0 +1,169 @@
+{
+	"version": 1,
+	"projects": {
+		"demo": {
+			"root": "apps/demo/",
+			"sourceRoot": "apps/demo/src",
+			"projectType": "application",
+			"prefix": "demo",
+			"architect": {
+				"ios": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug ios --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo",
+						"parallel": false
+					}
+				},
+				"android": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug android --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo",
+						"parallel": false
+					}
+				},
+				"clean": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns clean", "npm i"],
+						"cwd": "apps/demo",
+						"parallel": false
+					}
+				}
+			}
+		},
+		"demo-angular": {
+			"root": "apps/demo-angular/",
+			"sourceRoot": "apps/demo-angular/src",
+			"projectType": "application",
+			"prefix": "demo",
+			"architect": {
+				"ios": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug ios --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo-angular",
+						"parallel": false
+					}
+				},
+				"android": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug android --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo-angular",
+						"parallel": false
+					}
+				},
+				"clean": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns clean", "npm i"],
+						"cwd": "apps/demo-angular",
+						"parallel": false
+					}
+				}
+			}
+		},
+		"demo-react": {
+			"root": "apps/demo-react/",
+			"sourceRoot": "apps/demo-react/src",
+			"projectType": "application",
+			"prefix": "demo",
+			"architect": {
+				"ios": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug ios --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo-react",
+						"parallel": false
+					}
+				},
+				"android": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns debug android --no-hmr --emulator --env.testing"],
+						"cwd": "apps/demo-react",
+						"parallel": false
+					}
+				},
+				"clean": {
+					"builder": "@nrwl/workspace:run-commands",
+					"options": {
+						"commands": ["ns clean", "npm i"],
+						"cwd": "apps/demo-react",
+						"parallel": false
+					}
+				}
+			}
+		},
+		"all": {
+			"root": "packages/",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-nativescript-adapter:build.all"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages"],
+						"parallel": false
+					}
+				}
+			}
+		},
+		"expo-nativescript-adapter": {
+			"root": "packages/expo-nativescript-adapter",
+			"sourceRoot": "packages/expo-nativescript-adapter",
+			"projectType": "library",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"options": {
+						"outputPath": "dist/packages/expo-nativescript-adapter",
+						"tsConfig": "packages/expo-nativescript-adapter/tsconfig.json",
+						"packageJson": "packages/expo-nativescript-adapter/package.json",
+						"main": "packages/expo-nativescript-adapter/index.ts",
+						"assets": [
+							"packages/expo-nativescript-adapter/*.md",
+							"packages/expo-nativescript-adapter/index.d.ts",
+							"LICENSE",
+							{
+								"glob": "**/*",
+								"input": "packages/expo-nativescript-adapter/platforms/",
+								"output": "./platforms/"
+							}
+						]
+					}
+				},
+				"build.all": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-nativescript-adapter:build", "node tools/scripts/build-finish.ts expo-nativescript-adapter"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-nativescript-adapter"],
+						"parallel": false
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"defaultCollection": "@nrwl/workspace"
+	}
+}

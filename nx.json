@@ -1,0 +1,37 @@
+{
+	"npmScope": "nativescript-community",
+	"affected": {
+		"defaultBase": "master"
+	},
+	"implicitDependencies": {
+		"workspace.json": "*",
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		"tsconfig.base.json": "*",
+		"tslint.json": "*",
+		"nx.json": "*"
+	},
+	"projects": {
+		"demo": {
+			"tags": []
+		},
+		"demo-angular": {
+			"tags": []
+		},
+		"demo-react": {
+			"tags": []
+		},
+		"all": {
+			"tags": []
+		},
+		"expo-nativescript-adapter": {
+			"tags": []
+		}
+	},
+	"workspaceLayout": {
+		"appsDir": "apps",
+		"libsDir": "packages"
+	}
+}

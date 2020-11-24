@@ -1,0 +1,25 @@
+{
+    "main": "app.js",
+    "dependencies": {
+        "@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
+        "@nativescript/core": "file:../../node_modules/@nativescript/core",
+        "@react-navigation/core": "file:../../node_modules/@react-navigation/core",
+        "@unimodules/core": "file:../../node_modules/@unimodules/core",
+        "react": "file:../../node_modules/react",
+        "react-nativescript": "file:../../node_modules/react-nativescript",
+        "react-nativescript-navigation": "file:../../node_modules/react-nativescript-navigation"
+    },
+    "devDependencies": {
+        "@babel/core": "file:../../node_modules/@babel/core",
+        "@nativescript/android": "7.0.1",
+        "@nativescript/ios": "7.0.4",
+        "@nativescript/webpack": "~3.0.0",
+        "@nativescript/types": "file:../../node_modules/@nativescript/types",
+        "@pmmmwh/react-refresh-webpack-plugin": "file:../../node_modules/@pmmmwh/react-refresh-webpack-plugin",
+        "@types/react": "file:../../node_modules/@types/react",
+        "babel-loader": "file:../../node_modules/babel-loader",
+        "fork-ts-checker-webpack-plugin": "file:../../node_modules/fork-ts-checker-webpack-plugin",
+        "react-refresh": "file:../../node_modules/react-refresh",
+        "typescript": "file:../../node_modules/typescript"
+    }
+}
