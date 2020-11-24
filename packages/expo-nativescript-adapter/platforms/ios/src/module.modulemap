@@ -1,0 +1,5 @@
+module ExpoNativeScriptAdapter {
+    umbrella header "ExpoNativeScriptAdapterUmbrella.h"
+    export *
+    module * { export * }
+}

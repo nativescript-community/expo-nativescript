@@ -1,6 +1,6 @@
 # @nativescript-community/expo-nativescript-adapter
 
-```javascript
+```sh
 ns plugin add @nativescript-community/expo-nativescript-adapter
 ```
 
@@ -10,4 +10,4 @@ ns plugin add @nativescript-community/expo-nativescript-adapter
 
 ## License
 
-Apache License Version 2.0
+MIT
