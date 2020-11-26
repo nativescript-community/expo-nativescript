@@ -1,0 +1,9 @@
+platform :ios, '10.0'
+
+# https://github.com/expo/expo/tree/master/packages/%40unimodules/core
+# Here I'm inputting a path based on where we'd expect the Podfile to be
+# placed into a NativeScript project. For example, for the app "NSIDE":
+#   NSIDE/platforms/ios/Podfile
+#   NSIDE/node_modules
+pod 'UMPermissionsInterface', path: '../../node_modules/unimodules-permissions-interface/ios'
+pod 'EXPermissions', path: '../../node_modules/expo-permissions/ios'
