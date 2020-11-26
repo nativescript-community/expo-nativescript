@@ -1,35 +1,43 @@
 {
-	"name": "@nativescript-community/expo-contacts-nativescript-plugin",
-	"version": "1.0.0",
-	"description": "Add a plugin description",
-	"main": "index",
-	"typings": "index.d.ts",
-	"nativescript": {
-		"platforms": {
-			"ios": "6.0.0",
-			"android": "6.0.0"
-		}
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/NativeScript/plugins.git"
-	},
-	"keywords": [
-		"NativeScript",
-		"JavaScript",
-		"TypeScript",
-		"iOS",
-		"Android"
-	],
-	"author": {
-		"name": "NativeScript",
-		"email": "oss@nativescript.org"
-	},
-	"bugs": {
-		"url": "https://github.com/NativeScript/plugins/issues"
-	},
-	"license": "Apache-2.0",
-	"homepage": "https://github.com/NativeScript/plugins",
-	"readmeFilename": "README.md",
-	"bootstrapper": "@nativescript/plugin-seed"
+    "name": "@nativescript-community/expo-contacts-nativescript-plugin",
+    "version": "1.0.0",
+    "description": "Expo Contacts, adapted for NativeScript.",
+    "main": "index",
+    "typings": "index.d.ts",
+    "nativescript": {
+        "platforms": {
+            "ios": "6.0.0",
+            "android": "6.0.0"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nativescript-community/expo-nativescript.git"
+    },
+    "keywords": [
+        "NativeScript",
+        "JavaScript",
+        "TypeScript",
+        "iOS",
+        "Android"
+    ],
+    "peerDependencies": {
+        "@nativescript-community/expo-nativescript-adapter": "*",
+        "@unimodules/core": "^5.5.1",
+        "expo-contacts": "^8.6.0",
+		"expo-permissions": "^9.3.0",
+		"unimodules-file-system-interface": "^5.3.0",
+        "unimodules-permissions-interface": "^5.3.0"
+    },
+    "author": {
+        "name": "Jamie Birch",
+        "email": "14055146+shirakaba@users.noreply.github.com"
+    },
+    "bugs": {
+        "url": "https://github.com/nativescript-community/expo-nativescript"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/nativescript-community/expo-nativescript/README.md",
+    "readmeFilename": "README.md",
+    "bootstrapper": "@nativescript/plugin-seed"
 }

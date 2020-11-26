@@ -1,6 +1,6 @@
 # @nativescript-community/expo-permissions-nativescript-plugin
 
-```javascript
+```sh
 npm install --save @unimodules/core expo-permissions unimodules-permissions-interface
 ns plugin add @nativescript-community/expo-nativescript-adapter
 ns plugin add @nativescript-community/expo-permissions-nativescript-plugin
@@ -10,10 +10,109 @@ ns plugin add @nativescript-community/expo-permissions-nativescript-plugin
 
 `expo-permissions-nativescript-plugin` has the following peer dependencies:
 
-* `@unimodules/core` – for its native modules for iOS (`UMCore`) and Android (`org.unimodules.core`), which implement a platform-agnostic API for consuming Expo Unimodules.
-* `@nativescript-community/expo-nativescript-adapter` – to adapt Expo Unimodules to NativeScript.
-* `expo-permissions` – for its native modules for iOS (`EXPermissions`) and Android (`expo.modules.permissions`).
-* `unimodules-permissions-interface` – for its native modules for iOS (`UMPermissionsInterface`) and Android (`org.unimodules.interfaces.permissions`). It's the interface that `expo-permissions` implements.
+<table>
+    <tbody>
+        <tr>
+            <td align="right" valign="bottom" rowspan="2">
+                <h3>Package</h3>
+            </td>
+            <td align="center" valign="middle" colspan="2">
+                <h3>Native Module</h3>
+            </td>
+            <td align="center" valign="bottom" rowspan="2">
+                <h3>Optional?</h3>
+            </td>
+            <td align="left" valign="bottom" rowspan="2">
+                <h3>Purpose</h3>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle">
+                <h3>iOS</h3>
+            </td>
+            <td align="center" valign="middle">
+                <h3>Android</h3>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>@unimodules/core</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                <code>UMCore</code>
+            </td>
+            <td align="center" valign="middle">
+                <code>org.unimodules.core</code>
+            </td>
+            <td align="left" valign="middle">
+                Mandatory
+            </td>
+            <td align="left" valign="middle">
+                Implements the platform-agnostic API for consuming Expo Unimodules.
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>@nativescript-community/expo-nativescript-adapter</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                <code>UMNativeModulesProxy</code>
+            </td>
+            <td align="center" valign="middle">
+                <code>org.unimodules.adapters.nativescript</code>
+            </td>
+            <td align="left" valign="middle">
+                Mandatory
+            </td>
+            <td align="left" valign="middle">
+                Adapts Expo Unimodules to NativeScript (and auto-installs the native modules for the above node module).
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>unimodules-permissions-interface</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                <code>UMPermissionsInterface</code>
+            </td>
+            <td align="center" valign="middle">
+                <code>org.unimodules.interfaces.permissions</code>
+            </td>
+            <td align="left" valign="middle">
+                Mandatory
+            </td>
+            <td align="left" valign="middle">
+                It's the interface that <code>expo-permissions</code> implements.
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>expo-permissions</code></h3>
+            </td>
+            <td align="center" valign="middle" rowspan="2">
+                <code>EXPermissions</code>
+            </td>
+            <td align="center" valign="middle" rowspan="2">
+                <code>expo.modules.permissions</code>
+            </td>
+            <td align="left" valign="middle" rowspan="2">
+                Mandatory
+            </td>
+            <td align="left" valign="middle">
+                Provides the Expo <a href="https://docs.expo.io/versions/v39.0.0/sdk/permissions/">Permissions</a> APIs.
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>@nativescript-community/expo-permissions-nativescript-plugin</code></h3>
+            </td>
+            <td align="left" valign="middle">
+                Same as above (this auto-installs the native modules for the above node module).
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 ## Status
 

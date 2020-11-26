@@ -13,7 +13,49 @@ ns plugin add @nativescript-community/expo-nativescript-adapter
 
 `expo-nativescript-adapter` has the following peer dependencies:
 
-* `@unimodules/core` – for its native modules for iOS (`UMCore`) and Android (`org.unimodules.core`), which implement a platform-agnostic API for consuming Expo Unimodules.
+<table>
+    <tbody>
+        <tr>
+            <td align="right" valign="bottom" rowspan="2">
+                <h3>Package</h3>
+            </td>
+            <td align="center" valign="middle" colspan="2">
+                <h3>Native Module</h3>
+            </td>
+            <td align="center" valign="bottom" rowspan="2">
+                <h3>Optional?</h3>
+            </td>
+            <td align="left" valign="bottom" rowspan="2">
+                <h3>Purpose</h3>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle">
+                <h3>iOS</h3>
+            </td>
+            <td align="center" valign="middle">
+                <h3>Android</h3>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>@unimodules/core</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                <code>UMCore</code>
+            </td>
+            <td align="center" valign="middle">
+                <code>org.unimodules.core</code>
+            </td>
+            <td align="left" valign="middle">
+                Mandatory
+            </td>
+            <td align="left" valign="middle">
+                Implements the platform-agnostic API for consuming Expo Unimodules.
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ## Status
 
