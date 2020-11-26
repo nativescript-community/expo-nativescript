@@ -105,7 +105,7 @@
 					"builder": "@nrwl/workspace:run-commands",
 					"outputs": ["dist/packages"],
 					"options": {
-						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all"],
+						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all", "nx run expo-contacts-nativescript-plugin:build.all"],
 						"parallel": false
 					}
 				},
@@ -200,6 +200,49 @@
 					"outputs": ["dist/packages"],
 					"options": {
 						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-permissions-nativescript-plugin"],
+						"parallel": false
+					}
+				}
+			}
+		},
+		"expo-contacts-nativescript-plugin": {
+			"root": "packages/expo-contacts-nativescript-plugin",
+			"sourceRoot": "packages/expo-contacts-nativescript-plugin",
+			"projectType": "library",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"options": {
+						"outputPath": "dist/packages/expo-contacts-nativescript-plugin",
+						"tsConfig": "packages/expo-contacts-nativescript-plugin/tsconfig.json",
+						"packageJson": "packages/expo-contacts-nativescript-plugin/package.json",
+						"main": "packages/expo-contacts-nativescript-plugin/index.ts",
+						"assets": [
+							"packages/expo-contacts-nativescript-plugin/*.md",
+							"packages/expo-contacts-nativescript-plugin/index.d.ts",
+							"LICENSE",
+							{
+								"glob": "**/*",
+								"input": "packages/expo-contacts-nativescript-plugin/platforms/",
+								"output": "./platforms/"
+							}
+						]
+					}
+				},
+				"build.all": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-contacts-nativescript-plugin:build", "node tools/scripts/build-finish.ts expo-contacts-nativescript-plugin"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-contacts-nativescript-plugin"],
 						"parallel": false
 					}
 				}

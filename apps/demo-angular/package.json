@@ -13,15 +13,16 @@
 		"@nativescript/angular": "file:../../node_modules/@nativescript/angular",
 		"@nativescript/core": "file:../../node_modules/@nativescript/core",
 		"@nativescript/ios": "file:../../node_modules/@nativescript/ios",
-        "@unimodules/core": "file:../../node_modules/@unimodules/core",
-        "expo-permissions": "file:../../node_modules/expo-permissions",
-        "unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface",
+		"@unimodules/core": "file:../../node_modules/@unimodules/core",
+		"expo-permissions": "file:../../node_modules/expo-permissions",
+		"unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface",
 		"nativescript-theme-core": "file:../../node_modules/nativescript-theme-core",
 		"reflect-metadata": "file:../../node_modules/reflect-metadata",
 		"rxjs": "file:../../node_modules/rxjs",
 		"zone.js": "file:../../node_modules/zone.js",
 		"@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
-		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin"
+		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin",
+		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "file:../../node_modules/@angular/compiler-cli",

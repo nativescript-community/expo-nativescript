@@ -7,6 +7,7 @@ import { HomeComponent } from './home.component';
 const routes: Routes = [
 	{ path: '', redirectTo: '/home', pathMatch: 'full' },
 	{ path: 'home', component: HomeComponent },
+	{ path: 'expo-contacts-nativescript-plugin', loadChildren: () => import('./plugin-demos/expo-contacts-nativescript-plugin.module').then((m) => m.ExpoContactsNativescriptPluginModule) },
 	{ path: 'expo-nativescript-adapter', loadChildren: () => import('./plugin-demos/expo-nativescript-adapter.module').then((m) => m.ExpoNativescriptAdapterModule) },
 	{ path: 'expo-permissions-nativescript-plugin', loadChildren: () => import('./plugin-demos/expo-permissions-nativescript-plugin.module').then((m) => m.ExpoPermissionsNativescriptPluginModule) },
 ];

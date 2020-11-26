@@ -95,6 +95,13 @@ module.exports = {
 					description: '@nativescript-community/expo-permissions-nativescript-plugin: Build',
 				},
 			},
+			// @nativescript-community/expo-contacts-nativescript-plugin
+			'expo-contacts-nativescript-plugin': {
+				build: {
+					script: 'nx run expo-contacts-nativescript-plugin:build.all',
+					description: '@nativescript-community/expo-contacts-nativescript-plugin: Build',
+				},
+			},
 			'build-all': {
 				script: 'nx run all:build',
 				description: 'Build all packages',
@@ -112,6 +119,10 @@ module.exports = {
 			'expo-permissions-nativescript-plugin': {
 				script: 'nx run expo-permissions-nativescript-plugin:focus',
 				description: 'Focus on @nativescript-community/expo-permissions-nativescript-plugin',
+			},
+			'expo-contacts-nativescript-plugin': {
+				script: 'nx run expo-contacts-nativescript-plugin:focus',
+				description: 'Focus on @nativescript-community/expo-contacts-nativescript-plugin',
 			},
 			reset: {
 				script: 'nx run all:focus',

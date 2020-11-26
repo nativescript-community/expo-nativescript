@@ -7,6 +7,7 @@ npm run setup
 npm start
 ```
 
+- @nativescript-community/expo-contacts-nativescript-plugin
 - @nativescript-community/expo-nativescript-adapter
 - @nativescript-community/expo-permissions-nativescript-plugin
 
