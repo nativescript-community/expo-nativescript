@@ -1,0 +1,21 @@
+platform :ios, '10.0'
+
+# https://github.com/expo/expo/tree/master/packages/%40unimodules/core
+# Here I'm inputting a path based on where we'd expect the Podfile to be
+# placed into a NativeScript project. For example, for the app "NSIDE":
+#   NSIDE/platforms/ios/Podfile
+#   NSIDE/node_modules
+#
+# As the Flutter plugin's podspec seems to be unfinished, I'm judging based on:
+#   expo-contacts-flutter-plugin/android/src/build.gradle
+# ... that imported:
+#   unimodules-core, expo_flutter_adapter, expo-contacts.
+pod 'UMCore', path: '../../node_modules/@unimodules/core/ios'
+pod 'EXContacts', path: '../../node_modules/expo-contacts/ios'
+# I'm in two minds about whether to specify this. We've specified it in the package.json's peerDependencies, so it's implicitly required to begin with.
+# pod 'ExpoNativeScriptAdapter', path: '../../node_modules/@nativescript-community/expo-nativescript-adapter/platforms/ios'
+
+# These two pods are the dependencies of EXContacts itself. Installing EXContacts alone didn't lead to them being installed:
+#   [!] Unable to find a specification for `UMFileSystemInterface` depended upon by `EXContacts`
+pod 'UMPermissionsInterface', path: '../../node_modules/unimodules-permissions-interface/ios'
+pod 'UMFileSystemInterface', path: '../../node_modules/unimodules-file-system-interface/ios'

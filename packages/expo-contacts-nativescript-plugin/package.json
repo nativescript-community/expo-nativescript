@@ -2,8 +2,8 @@
     "name": "@nativescript-community/expo-contacts-nativescript-plugin",
     "version": "1.0.0",
     "description": "Expo Contacts, adapted for NativeScript.",
-    "main": "index",
-    "typings": "index.d.ts",
+    "main": "Contacts",
+    "typings": "Contacts.d.ts",
     "nativescript": {
         "platforms": {
             "ios": "6.0.0",
@@ -25,7 +25,6 @@
         "@nativescript-community/expo-nativescript-adapter": "*",
         "@unimodules/core": "^5.5.1",
         "expo-contacts": "^8.6.0",
-		"expo-permissions": "^9.3.0",
 		"unimodules-file-system-interface": "^5.3.0",
         "unimodules-permissions-interface": "^5.3.0"
     },
