@@ -7,7 +7,10 @@
 		"nativescript-theme-core": "file:../../node_modules/nativescript-theme-core",
 		"@nativescript/core": "file:../../node_modules/@nativescript/core",
 		"@nativescript-community/expo-nativescript-adapter": "file:../../packages/expo-nativescript-adapter",
-		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../packages/expo-permissions-nativescript-plugin"
+		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../packages/expo-permissions-nativescript-plugin",
+		"@unimodules/core": "file:../../node_modules/@unimodules/core",
+		"expo-permissions": "file:../../node_modules/expo-permissions",
+		"unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface"
 	},
 	"devDependencies": {
 		"@nativescript/android": "7.0.1",

@@ -2,14 +2,17 @@
     "main": "app.js",
     "dependencies": {
         "@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
+        "@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin",
         "@nativescript/android": "file:../../node_modules/@nativescript/android",
         "@nativescript/core": "file:../../node_modules/@nativescript/core",
         "@nativescript/ios": "file:../../node_modules/@nativescript/ios",
         "@react-navigation/core": "file:../../node_modules/@react-navigation/core",
         "@unimodules/core": "file:../../node_modules/@unimodules/core",
+        "expo-permissions": "file:../../node_modules/expo-permissions",
         "react": "file:../../node_modules/react",
         "react-nativescript": "file:../../node_modules/react-nativescript",
-        "react-nativescript-navigation": "file:../../node_modules/react-nativescript-navigation"
+        "react-nativescript-navigation": "file:../../node_modules/react-nativescript-navigation",
+        "unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface"
     },
     "devDependencies": {
         "@babel/core": "file:../../node_modules/@babel/core",

@@ -9,6 +9,12 @@ npm install --save @unimodules/core
 ns plugin add @nativescript-community/expo-nativescript-adapter
 ```
 
+## Structure
+
+`expo-nativescript-adapter` has the following peer dependencies:
+
+* `@unimodules/core` – for its native modules for iOS (`UMCore`) and Android (`org.unimodules.core`), which implement a platform-agnostic API for consuming Expo Unimodules.
+
 ## Status
 
 *See [@unimodules/react-native-adapter](https://github.com/expo/expo/tree/master/packages/%40unimodules/react-native-adapter) to understand what modules I'm referring to here.*
@@ -176,17 +182,6 @@ ns plugin add @nativescript-community/expo-nativescript-adapter
         </tr>
     </tbody>
 </table>
-
-
-## Structure
-
-`expo-nativescript-adapter` has the following peer dependencies:
-
-* `@unimodules/core` – more specifically, its native modules for iOS (`UMCore`) and Android (`org.unimodules.core`).
-
-Thus, you will need to explicitly install **both** `expo-nativescript-adapter` and `@unimodules/core` to use any Expo native module in NativeScript.
-
-`@unimodules/core` implements a common API for all Expo Unimodules, and provides interfaces for platforms like NativeScript (and, in fact, React Native) to implement in order to "adapt" Expo Unimodules for the given platform.
 
 ## Usage
 
