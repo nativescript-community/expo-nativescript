@@ -8,6 +8,7 @@ npm start
 ```
 
 - @nativescript-community/expo-nativescript-adapter
+- @nativescript-community/expo-permissions-nativescript-plugin
 
 # How to use?
 

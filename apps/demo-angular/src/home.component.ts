@@ -9,5 +9,8 @@ export class HomeComponent {
 		{
 			name: 'expo-nativescript-adapter',
 		},
+		{
+			name: 'expo-permissions-nativescript-plugin',
+		},
 	];
 }

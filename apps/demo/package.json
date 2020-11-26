@@ -6,7 +6,8 @@
 	"dependencies": {
 		"nativescript-theme-core": "file:../../node_modules/nativescript-theme-core",
 		"@nativescript/core": "file:../../node_modules/@nativescript/core",
-		"@nativescript-community/expo-nativescript-adapter": "file:../../packages/expo-nativescript-adapter"
+		"@nativescript-community/expo-nativescript-adapter": "file:../../packages/expo-nativescript-adapter",
+		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../packages/expo-permissions-nativescript-plugin"
 	},
 	"devDependencies": {
 		"@nativescript/android": "7.0.1",

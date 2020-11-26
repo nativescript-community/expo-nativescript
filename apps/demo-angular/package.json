@@ -17,7 +17,8 @@
 		"reflect-metadata": "file:../../node_modules/reflect-metadata",
 		"rxjs": "file:../../node_modules/rxjs",
 		"zone.js": "file:../../node_modules/zone.js",
-		"@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter"
+		"@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
+		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "file:../../node_modules/@angular/compiler-cli",

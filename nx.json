@@ -28,6 +28,9 @@
 		},
 		"expo-nativescript-adapter": {
 			"tags": []
+		},
+		"expo-permissions-nativescript-plugin": {
+			"tags": []
 		}
 	},
 	"workspaceLayout": {

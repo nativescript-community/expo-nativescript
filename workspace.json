@@ -105,7 +105,7 @@
 					"builder": "@nrwl/workspace:run-commands",
 					"outputs": ["dist/packages"],
 					"options": {
-						"commands": ["nx run expo-nativescript-adapter:build.all"],
+						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all"],
 						"parallel": false
 					}
 				},
@@ -157,6 +157,49 @@
 					"outputs": ["dist/packages"],
 					"options": {
 						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-nativescript-adapter"],
+						"parallel": false
+					}
+				}
+			}
+		},
+		"expo-permissions-nativescript-plugin": {
+			"root": "packages/expo-permissions-nativescript-plugin",
+			"sourceRoot": "packages/expo-permissions-nativescript-plugin",
+			"projectType": "library",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"options": {
+						"outputPath": "dist/packages/expo-permissions-nativescript-plugin",
+						"tsConfig": "packages/expo-permissions-nativescript-plugin/tsconfig.json",
+						"packageJson": "packages/expo-permissions-nativescript-plugin/package.json",
+						"main": "packages/expo-permissions-nativescript-plugin/index.ts",
+						"assets": [
+							"packages/expo-permissions-nativescript-plugin/*.md",
+							"packages/expo-permissions-nativescript-plugin/index.d.ts",
+							"LICENSE",
+							{
+								"glob": "**/*",
+								"input": "packages/expo-permissions-nativescript-plugin/platforms/",
+								"output": "./platforms/"
+							}
+						]
+					}
+				},
+				"build.all": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-permissions-nativescript-plugin:build", "node tools/scripts/build-finish.ts expo-permissions-nativescript-plugin"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-permissions-nativescript-plugin"],
 						"parallel": false
 					}
 				}

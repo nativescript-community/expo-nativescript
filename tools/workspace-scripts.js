@@ -88,6 +88,13 @@ module.exports = {
 					description: '@nativescript-community/expo-nativescript-adapter: Build',
 				},
 			},
+			// @nativescript-community/expo-permissions-nativescript-plugin
+			'expo-permissions-nativescript-plugin': {
+				build: {
+					script: 'nx run expo-permissions-nativescript-plugin:build.all',
+					description: '@nativescript-community/expo-permissions-nativescript-plugin: Build',
+				},
+			},
 			'build-all': {
 				script: 'nx run all:build',
 				description: 'Build all packages',
@@ -101,6 +108,10 @@ module.exports = {
 			'expo-nativescript-adapter': {
 				script: 'nx run expo-nativescript-adapter:focus',
 				description: 'Focus on @nativescript-community/expo-nativescript-adapter',
+			},
+			'expo-permissions-nativescript-plugin': {
+				script: 'nx run expo-permissions-nativescript-plugin:focus',
+				description: 'Focus on @nativescript-community/expo-permissions-nativescript-plugin',
 			},
 			reset: {
 				script: 'nx run all:focus',
