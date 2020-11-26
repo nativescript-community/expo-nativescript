@@ -204,7 +204,21 @@ ns plugin add @nativescript-community/expo-contacts-nativescript-plugin
         </tr>
         <tr>
             <td align="right" valign="middle">
-                <h3><code>usePermissions</code> React hook</h3>
+                <h3><code>createGroupAsync()</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                🥈
+            </td>
+            <td align="center" valign="middle">
+                🥈
+            </td>
+            <td align="left" valign="middle">
+                Unlike the corresponding Expo method, in this implementation, the <code>name</code> param is not optional; this is because the <code>uuidv4</code> library doesn't work out-of-the-box in NativeScript. I've left it up to the consumer to provide their own unique <code>name</code>.
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>writeContactToFileAsync()</code></h3>
             </td>
             <td align="center" valign="middle">
                 🚫
@@ -213,7 +227,21 @@ ns plugin add @nativescript-community/expo-contacts-nativescript-plugin
                 🚫
             </td>
             <td align="left" valign="middle">
-                Has some kind of dependency on React Native. Won't boter implementing.
+                The method is implemented, but we haven't ported <code>expo-file-system</code> to NativeScript yet, so this will fail at runtime in practice.
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="middle">
+                <h3><code>shareContactAsync()</code></h3>
+            </td>
+            <td align="center" valign="middle">
+                🚫
+            </td>
+            <td align="center" valign="middle">
+                ✅
+            </td>
+            <td align="left" valign="middle">
+                On iOS, this requires writing to the file system. The method is implemented, but we haven't ported <code>expo-file-system</code> to NativeScript yet, so this will fail at runtime on iOS in practice.
             </td>
         </tr>
         <tr>
@@ -227,7 +255,7 @@ ns plugin add @nativescript-community/expo-contacts-nativescript-plugin
                 ✅
             </td>
             <td align="left" valign="middle">
-                Should just work! Note that Android support is pending implementation of <code>expo-nativescript-adapter</code>.
+                Implemented exactly as in Expo! Note that Android support is pending implementation of <code>expo-nativescript-adapter</code>.
             </td>
         </tr>
     </tbody>
@@ -237,16 +265,7 @@ ns plugin add @nativescript-community/expo-contacts-nativescript-plugin
 
 *Again, see [Contacts](https://docs.expo.io/versions/v39.0.0/sdk/contacts/) in the Expo SDK API docs for full documentation.*
 
-Note that you can *only* use `expo-permissions-nativescript-plugin` to check or request permissions for other Expo Unimodules that you have installed. So, for example, you wouldn't be able to use it to request Contacts permissions unless you also had `expo-contacts-nativescript-plugin` installed. That's just the way it works.
-
-Also, before asking for any permission, just as with native app development, you will still need to have the corresponding property listed in the appropriate place in your app, for example:
-
-* (for iOS): `App_Resources/iOS/Info.plist` file, e.g. `<key>NSContactsUsageDescription</key>`
-* (for Android): `App_Resources/Android/src/main/AndroidManifest.xml` file, e.g. `<uses-permission android:name="android.permission.READ_CONTACTS" /> <uses-permission android:name="android.permission.WRITE_CONTACTS" />`.
-
-... otherwise, your app may immediately crash without explanation 🤕
-
-These NativeScript Expo plugins will not enter these properties for you; it's **your** responsibility to add them! Remember that when developing NativeScript apps, you'll have to run a rebuild of the app (e.g. `tns build ios`) to copy your latest `Info.plist` or `AndroidManifest.xml` into the app bundle; it's not simply something that Webpack will do for you in watch mode (to my understanding).
+In practice, you'll probably need to request permissions to access contacts before using just about any of the Contacts APIs; so you should probably start off by calling `getPermissionsAsync()` or `requestPermissionsAsync()`; these APIs, as noted above, require both `expo-permissions` and `@nativescript-community/expo-permissions-nativescript-plugin` to be installed.
 
 ## License
 
