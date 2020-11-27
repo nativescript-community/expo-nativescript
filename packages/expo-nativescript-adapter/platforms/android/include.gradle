@@ -1,32 +1,68 @@
-allprojects {
-    repositories {
-        google()
-        jcenter()
+/*
+ * Put the following into demo-react/platforms/android/settings.gradle:
+
+include ':app', ':unimodules-core'//, ':runtime', ':runtime-binding-generator'
+project(':unimodules-core').projectDir = new File(rootProject.projectDir, '../../node_modules/@unimodules/core/android')
+*/
+
+apply plugin: 'maven'
+
+/**
+ * A copy-paste of the contents of:
+ *   apply from: project(":unimodules-core").file("../unimodules-core.gradle")
+ * ... But with the guard against non React Native projects removed.
+ */
+class UnimodulesPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        // Exclude '*/flutter/*' files if not compiling for Flutter
+        if (!(new File(project.rootProject.projectDir.parentFile, 'pubspec.yaml').exists())) {
+            project.android.sourceSets {
+                main {
+                    java {
+                        exclude '**/flutter/**'
+                    }
+                }
+            }
+        }
+
+        project.configurations.configureEach {
+            if (it.getName().startsWith('test') && project.file('./src/test').exists()) {
+                project.dependencies.add(it.getName(), project.project(':unimodules-test-core'))
+            }
+        }
+
+        project.ext.unimodule = {
+            String dep, Closure closure = null ->
+                Object dependency = null;
+
+                dependency = project.project(":$dep")
+                // if (new File(project.rootProject.projectDir.parentFile, 'package.json').exists()) {
+                //     // Parent directory of the android project has package.json -- probably React Native
+                //     dependency = project.project(":$dep")
+                // } else {
+                //     // There's no package.json and no pubspec.yaml
+                //     throw new GradleException(
+                //         "'unimodules-core.gradle' used in a project that seems not to be React Native project."
+                //     )
+                // }
+
+                String configurationName = project.configurations.findByName("implementation") ? "implementation" : "compile"
+
+                project.dependencies.add(configurationName, dependency, closure)
+        }
     }
 }
 
+apply plugin: UnimodulesPlugin
+
 dependencies {
-    // implementation 'org.unimodules:core:5.5.0'
-    /*
-Script '/Users/jamie/Documents/git/expo-nativescript-nx/apps/demo-react/node_modules/@nativescript-community/expo-nativescript-adapter/platforms/android/include.gradle' line: 13
-A problem occurred evaluating script.
-Cannot convert a null value to an object of type Dependency.
-The following types/formats are supported:
-  - Instances of Dependency.
-  - String or CharSequence values, for example 'org.gradle:gradle-core:1.0'.
-  - Maps, for example [group: 'org.gradle', name: 'gradle-core', version: '1.0'].
-  - FileCollections, for example files('some.jar', 'someOther.jar').
-  - Projects, for example project(':some:project:path').
-  - ClassPathNotation, for example gradleApi().
+  unimodule 'unimodules-core'
+//   unimodule 'unimodules-font-interface'
+//   unimodule 'unimodules-permissions-interface'
+//   unimodule 'unimodules-image-loader-interface'
+//   unimodule 'unimodules-app-loader'
 
-https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html
-https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:rootProject
-https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:findProject(java.lang.String)
+//   implementation 'com.facebook.react:react-native:+'
 
-See expo/packages/@unimodules/core/unimodules-core.gradle (suggests that it may require your app to have a pubspec.yaml)
-See expo/packages/@unimodules/core/android/build.gradle
-See expo/packages/expo-contacts-flutter-plugin/android/build.gradle
-See expo/packages/expo-contacts-flutter-plugin/pubspec.yaml (seems like a package.json)
-    */
-    provided rootProject.findProject(":unimodules-core")
+//   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.50')}"
 }
