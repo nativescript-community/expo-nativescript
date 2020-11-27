@@ -1,0 +1,32 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+dependencies {
+    // implementation 'org.unimodules:core:5.5.0'
+    /*
+Script '/Users/jamie/Documents/git/expo-nativescript-nx/apps/demo-react/node_modules/@nativescript-community/expo-nativescript-adapter/platforms/android/include.gradle' line: 13
+A problem occurred evaluating script.
+Cannot convert a null value to an object of type Dependency.
+The following types/formats are supported:
+  - Instances of Dependency.
+  - String or CharSequence values, for example 'org.gradle:gradle-core:1.0'.
+  - Maps, for example [group: 'org.gradle', name: 'gradle-core', version: '1.0'].
+  - FileCollections, for example files('some.jar', 'someOther.jar').
+  - Projects, for example project(':some:project:path').
+  - ClassPathNotation, for example gradleApi().
+
+https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:rootProject
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:findProject(java.lang.String)
+
+See expo/packages/@unimodules/core/unimodules-core.gradle (suggests that it may require your app to have a pubspec.yaml)
+See expo/packages/@unimodules/core/android/build.gradle
+See expo/packages/expo-contacts-flutter-plugin/android/build.gradle
+See expo/packages/expo-contacts-flutter-plugin/pubspec.yaml (seems like a package.json)
+    */
+    provided rootProject.findProject(":unimodules-core")
+}

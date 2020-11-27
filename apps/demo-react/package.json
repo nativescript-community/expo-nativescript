@@ -1,9 +1,9 @@
 {
     "main": "app.js",
     "dependencies": {
+        "@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin",
         "@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
         "@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin",
-        "@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin",
         "@nativescript/android": "file:../../node_modules/@nativescript/android",
         "@nativescript/core": "file:../../node_modules/@nativescript/core",
         "@nativescript/ios": "file:../../node_modules/@nativescript/ios",
