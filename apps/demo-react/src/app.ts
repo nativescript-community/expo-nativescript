@@ -9,6 +9,11 @@ You can use this file to perform app-level initialization, but the primary
 purpose of the file is to pass control to the app’s first module.
 */
 
+//@ts-ignore
+console.log("org.unimodules.core:", org.unimodules.core);
+//@ts-ignore
+console.log("org.unimodules.core.BasePackage:", org.unimodules.core.BasePackage);
+
 import * as ReactNativeScript from 'react-nativescript';
 import { mainStackNavigator as AppContainer } from './components/Navigator';
 

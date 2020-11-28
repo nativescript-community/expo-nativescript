@@ -80,8 +80,8 @@ apply plugin: UnimodulesPlugin
 /* The `compile project` approach as used in the expo-flutter-adapter example app. */
 dependencies {
     compile project(':unimodules-core')
-    compile project(':expo-permissions')
-    compile project(':unimodules-permissions-interface')
+    // compile project(':expo-permissions')
+    // compile project(':unimodules-permissions-interface')
     // compile project(':expo-sensors')
     // compile project(':unimodules-sensors-interface')
 }
