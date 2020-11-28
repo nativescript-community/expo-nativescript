@@ -1,76 +1,17 @@
 /*
  * Put the following into demo-react/platforms/android/settings.gradle:
 
-include ':app', ':unimodules-core'//, ':runtime', ':runtime-binding-generator'
+// Expo Unimodules integration
+// See: expo/packages/expo-flutter-adapter/example/android/settings.gradle
+include ':unimodules-core'
 project(':unimodules-core').projectDir = new File(rootProject.projectDir, '../../node_modules/@unimodules/core/android')
+
+include ':expo-permissions'
+project(':expo-permissions').projectDir = new File(rootProject.projectDir, '../../../expo-permissions/android')
+
+include ':unimodules-permissions-interface'
+project(':unimodules-permissions-interface').projectDir = new File(rootProject.projectDir, '../../../unimodules-permissions-interface/android')
 */
-
-buildscript {
-  // Simple helper that allows the root project to override versions declared by this library.
-  ext.safeExtGet = { prop, fallback ->
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-  }
-
-  repositories {
-    mavenCentral()
-  }
-
-  dependencies {
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet("kotlinVersion", "1.3.50")}")
-  }
-}
-
-// apply plugin: 'com.android.library'
-apply plugin: 'maven'
-apply plugin: 'kotlin-android'
-
-group = 'org.unimodules'
-version = '5.6.0'
-
-
-// Simple helper that allows the root project to override versions declared by this library.
-def safeExtGet(prop, fallback) {
-  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
-
-//Upload android library to maven with javadoc and android sources
-configurations {
-  deployerJars
-}
-
-//Creating sources with comments
-task androidSourcesJar(type: Jar) {
-  classifier = 'sources'
-  from android.sourceSets.main.java.srcDirs
-}
-
-//Put the androidSources and javadoc to the artifacts
-artifacts {
-  archives androidSourcesJar
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      configuration = configurations.deployerJars
-      repository(url: mavenLocal().url)
-    }
-  }
-}
-
-android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 29)
-
-  defaultConfig {
-    minSdkVersion safeExtGet("minSdkVersion", 21)
-    targetSdkVersion safeExtGet("targetSdkVersion", 29)
-    versionCode 20
-    versionName "5.6.0"
-  }
-  lintOptions {
-    abortOnError false
-  }
-}
 
 apply plugin: 'maven'
 
@@ -122,15 +63,25 @@ class UnimodulesPlugin implements Plugin<Project> {
 
 apply plugin: UnimodulesPlugin
 
+/* The `unimodule` approach used in react-native-adapter/android. */
+// dependencies {
+//   unimodule 'unimodules-core'
+//   /* Project with path ':unimodules-font-interface' could not be found in project ':app'. */
+// //   unimodule 'unimodules-font-interface'
+// //   unimodule 'unimodules-permissions-interface'
+// //   unimodule 'unimodules-image-loader-interface'
+// //   unimodule 'unimodules-app-loader'
+
+// //   implementation 'com.facebook.react:react-native:+'
+
+//   // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.50')}"
+// }
+
+/* The `compile project` approach as used in the expo-flutter-adapter example app. */
 dependencies {
-  unimodule 'unimodules-core'
-  /* Project with path ':unimodules-font-interface' could not be found in project ':app'. */
-//   unimodule 'unimodules-font-interface'
-//   unimodule 'unimodules-permissions-interface'
-//   unimodule 'unimodules-image-loader-interface'
-//   unimodule 'unimodules-app-loader'
-
-//   implementation 'com.facebook.react:react-native:+'
-
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.50')}"
+    compile project(':unimodules-core')
+    compile project(':expo-permissions')
+    compile project(':unimodules-permissions-interface')
+    // compile project(':expo-sensors')
+    // compile project(':unimodules-sensors-interface')
 }

@@ -1,9 +1,13 @@
 // Add your native dependencies here:
 
+// include ':unimodules-core'
+// project(':unimodules-core').projectDir = new File(rootProject.projectDir, '../../node_modules/@unimodules/core/android')
+
 // Uncomment to add recyclerview-v7 dependency
-//dependencies {
-//	compile 'com.android.support:recyclerview-v7:+'
-//}
+// dependencies {
+// 	compile 'com.android.support:recyclerview-v7:+'
+// 	compile ':unimodules-core'
+// }
 
 android {  
   compileSdkVersion 29
@@ -16,3 +20,22 @@ android {
     additionalParameters "--no-version-vectors"  
   }  
 } 
+
+
+// allprojects {
+//   repositories {
+//       mavenLocal()
+//       maven {
+//           // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+//           url("$rootDir/../node_modules/react-native/android")
+//       }
+//       maven {
+//           // Android JSC is installed from npm
+//           url("$rootDir/../node_modules/jsc-android/dist")
+//       }
+
+//       google()
+//       jcenter()
+//       maven { url 'https://jitpack.io' }
+//   }
+// }
