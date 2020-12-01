@@ -140,6 +140,16 @@
 								"glob": "**/*",
 								"input": "packages/expo-nativescript-adapter/platforms/",
 								"output": "./platforms/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-nativescript-adapter/typings/",
+								"output": "./typings/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-nativescript-adapter/hooks/",
+								"output": "./hooks/"
 							}
 						]
 					}
@@ -183,6 +193,11 @@
 								"glob": "**/*",
 								"input": "packages/expo-permissions-nativescript-plugin/platforms/",
 								"output": "./platforms/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-permissions-nativescript-plugin/typings/",
+								"output": "./typings/"
 							}
 						]
 					}
@@ -226,6 +241,11 @@
 								"glob": "**/*",
 								"input": "packages/expo-contacts-nativescript-plugin/platforms/",
 								"output": "./platforms/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-contacts-nativescript-plugin/typings/",
+								"output": "./typings/"
 							}
 						]
 					}
