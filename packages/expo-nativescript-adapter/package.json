@@ -11,6 +11,11 @@
         },
         "hooks": [
             {
+              "type": "after-prepare",
+              "script": "hooks/after-prepare.js",
+              "inject": true
+            },
+            {
               "type": "before-buildAndroidPlugin",
               "script": "hooks/before-buildAndroidPlugin.js",
               "inject": true
