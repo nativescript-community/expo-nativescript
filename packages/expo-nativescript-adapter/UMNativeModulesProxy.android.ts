@@ -16,12 +16,14 @@ type Context = globalAndroid.content.Context;
 
 /**
  * Stub for now.
- * @see ReactApplicationContext
+ * @see com.facebook.react.bridge.ReactApplicationContext
+ * @see https://github.com/facebook/react-native/blob/d72e078df41f1ba2eb94e4eb4fb28b8d0232a8a1/ReactAndroid/src/main/java/com/facebook/react/bridge/ReactApplicationContext.java
  */
 type NativeScriptApplicationContext = Context;
 /**
  * Stub for now.
  * @see com.facebook.react.uimanager.ViewManager
+ * @see https://github.com/facebook/react-native/blob/d72e078df41f1ba2eb94e4eb4fb28b8d0232a8a1/ReactAndroid/src/main/java/com/facebook/react/uimanager/ViewManager.java
  */
 type NativeScriptViewManager<V = any> = ViewManager<V>;
 
@@ -107,6 +109,10 @@ class NativeScriptModuleRegistryProvider extends org.unimodules.core.ModuleRegis
     }
 }
 
+/**
+ * @see com.facebook.react.ReactPackage
+ * @see https://github.com/facebook/react-native/blob/d72e078df41f1ba2eb94e4eb4fb28b8d0232a8a1/ReactAndroid/src/main/java/com/facebook/react/ReactPackage.java
+ */
 interface NativeScriptPackage {
 
 }
