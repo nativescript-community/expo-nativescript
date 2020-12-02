@@ -4,6 +4,7 @@ export const methodInfoArgumentsCountKey = "argumentsCount";
 
 export const modulesConstantsKey = 'modulesConstants';
 export const exportedMethodsKey = 'exportedMethods';
+export const viewManagersNamesKey = 'viewManagersNames';
 
 export type ExpoModuleExports = {
     [moduleName: string]: {
@@ -26,7 +27,7 @@ export interface MethodInfo {
 }
 
 export interface ConstantsToExport {
-    viewManagersNames: string[];
+    [viewManagersNamesKey]: string[];
     [exportedMethodsKey]: {
         [exportedModuleName: string]: MethodInfo[];
     };
