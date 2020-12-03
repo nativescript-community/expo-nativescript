@@ -5,10 +5,6 @@
     "main": "index",
     "typings": "index.d.ts",
     "nativescript": {
-        "platforms": {
-            "ios": "6.0.0",
-            "android": "6.0.0"
-        },
         "hooks": [
             {
               "type": "after-prepare",
