@@ -63,7 +63,7 @@ module.exports = function(args){
         }
 
         // Hasn't been injected yet.
-        updatedSettingsGradleContents = settingsGradleContents + "\n\n" + injectedBlock + "\n";
+        updatedSettingsGradleContents = settingsGradleContents.trim() + "\n\n" + injectedBlock + "\n";
     } else {
         // Has been injected before. Easiest just to overwrite it rather than re-validating it.
         /**
@@ -81,7 +81,8 @@ module.exports = function(args){
             mode === "inject" ? injectedBlock : "",
             suffix
         ]
-        .join("");
+        .join("")
+        .trim() + "\n";
     }
 
     if(settingsGradleContents === updatedSettingsGradleContents){
