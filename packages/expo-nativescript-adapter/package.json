@@ -18,6 +18,10 @@
             }
         ]
     },
+    "scripts": {
+        "postinstall": "node -e \"require('@nativescript/hook')(__dirname).postinstall();\"",
+        "preuninstall": "node -e \"require('@nativescript/hook')(__dirname).preuninstall();\""
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/nativescript-community/expo-nativescript.git"
