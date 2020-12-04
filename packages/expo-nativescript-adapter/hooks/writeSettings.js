@@ -11,13 +11,10 @@ const path = require("path");
  * 
  * @param {object} args – The arguments.
  * @param {string} args.platformsDir – The path to the NativeScript app's "platforms" directory.
- * @param {"inject"|"clean"} args.mode – Whether to inject the settings ("inject"), or clean them ("clean"),
- *        from settings.gradle.
+ * @param {"inject"|"clean"} args.mode – Whether to inject the settings ("inject"), or clean them ("clean"), from settings.gradle.
  * @param {string|undefined} args.logLabel – The identifying prefix to give any log messages written out.
- * @param {string} args.moduleLabel – The label by which to refer to the npm module that this hook is run by,
- *        for logging purposes (e.g. "@nativescript-community/expo-nativescript-adapter").
- * @param {string} args.packageLabel – The label by which to refer to the package that this hook is concerned
- *        with injecting, for logging purposes (e.g. ":unimodules-core").
+ * @param {string} args.moduleLabel – The label by which to refer to the npm module that this hook is run by, for logging purposes.
+ * @param {string} args.packageLabel – The label by which to refer to the package that this hook is concerned with injecting, for logging purposes (e.g. ":unimodules-core").
  * @param {RegExp} args.matchExp – The Regex expression to match.
  * @param {string} args.injectedBlock – The contents to inject.
  */
@@ -36,16 +33,6 @@ module.exports = function(args){
     const installationAdvice = `After having added your Android platform (i.e. via \`tns platform add android\`), please run \`ns plugin add ${moduleLabel}\` again so that this hook can ensure that '${packageLabel}' gets included into your automatically-generated 'settings.gradle' file.`;
 
     testCase(failedTestAssertionMessage);
-
-    if(!fs.existsSync(androidFolder)){
-        console.warn(`${logLabel} Unable to run hook, as Android folder at "${androidFolder}" was unexpectedly missing. ${installationAdvice}`);
-        return;
-    }
-
-    if(!fs.existsSync(settingsGradlePath)){
-        console.warn(`${logLabel} Unable to run hook, as failed to read settings.gradle file at "${settingsGradlePath}". ${installationAdvice}`);
-        return;
-    }
 
     /**
      * From here, we read from the existing settings.gradle, in case the user has written their own changes into it.
@@ -74,6 +61,7 @@ module.exports = function(args){
             console.log(`${logLabel} Successfully ran hook; '${packageLabel}' was already found to be absent from settings.gradle (so no need to remove it).`);
             return;
         }
+        
         // Hasn't been injected yet.
         updatedSettingsGradleContents = settingsGradleContents + "\n\n" + injectedBlock + "\n";
     } else {
