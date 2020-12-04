@@ -109,14 +109,15 @@ function testCase(matchExp, injectedBlock, failedTestAssertionMessage){
     const prefix = `rootProject.name = "plugindemoreact"\ninclude ':app'//, ':runtime', ':runtime-binding-generator'`;
     const suffix = `//project(':runtime-binding-generator').projectDir = new File("\${System.env.ANDROID_RUNTIME_HOME}/test-app/runtime-binding-generator")\n//project(':runtime').projectDir = new File("\${System.env.ANDROID_RUNTIME_HOME}/test-app/runtime")`;
 
-    const matchingCase = [prefix, injectedBlock, suffix].join("\n");
     const missingCase = [prefix, suffix].join("\n");
-
-    const matchingCaseMatches = matchingCase.match(matchExp);
     const missingCaseMatches = missingCase.match(matchExp);
-
+    
     console.assert(missingCaseMatches === null, failedTestAssertionMessage);
-    console.assert(matchingCaseMatches !== null, failedTestAssertionMessage);
-    console.assert(matchingCaseMatches.length === 3, failedTestAssertionMessage);
-    console.assert(matchingCaseMatches[0] === injectedBlock, failedTestAssertionMessage);
+    if(injectedBlock !== ""){
+        const matchingCase = [prefix, injectedBlock, suffix].join("\n");
+        const matchingCaseMatches = matchingCase.match(matchExp);
+        console.assert(matchingCaseMatches !== null, failedTestAssertionMessage);
+        console.assert(matchingCaseMatches.length === 3, failedTestAssertionMessage);
+        console.assert(matchingCaseMatches[0] === injectedBlock, failedTestAssertionMessage);
+    }
 }
