@@ -1,6 +1,6 @@
+const path = require("path");
 const pluginDir = path.dirname(__dirname);
 const hook = require('@nativescript/hook')(pluginDir);
-const path = require("path");
 const fs = require("fs");
 const writeSettings = require("./writeSettings");
 
