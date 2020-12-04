@@ -48,8 +48,17 @@ function testCase(){
  * @see https://github.com/NativeScript/nativescript-cli/blob/master/extending-cli.md
  */
 module.exports = function (hookArgs) {
-    const appRootFolder = hookArgs.projectDir;
-    const androidFolder = path.resolve(appRootFolder, "platforms", "android");
+    if(!hookArgs.ProjectData){
+        console.warn(`${logLabel} Unable to run hook, as hookArgs.ProjectData was unexpectedly falsy.`);
+        return;
+    }
+
+    if(!hookArgs.ProjectData.platformsDir){
+        console.warn(`${logLabel} Unable to run hook, as hookArgs.ProjectData.platformsDir was unexpectedly falsy.`);
+        return;
+    }
+
+    const androidFolder = path.resolve(hookArgs.ProjectData.platformsDir, "android");
     const settingsGradlePath = path.resolve(androidFolder, "settings.gradle");
     const installationAdvice = `After having added your Android platform (i.e. via \`tns platform add android\`), please run \`ns plugin add @nativescript-community/expo-nativescript-adapter\` again so that this hook can ensure that 'unimodules-core' gets included into your automatically-generated 'settings.gradle' file.`;
 

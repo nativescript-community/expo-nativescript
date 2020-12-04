@@ -1,0 +1,1 @@
+require('@nativescript/hook')(require("path").dirname(__dirname)).preuninstall();

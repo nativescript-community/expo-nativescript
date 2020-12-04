@@ -19,8 +19,8 @@
         ]
     },
     "scripts": {
-        "postinstall": "node -e \"require('@nativescript/hook')(__dirname).postinstall();\"",
-        "preuninstall": "node -e \"require('@nativescript/hook')(__dirname).preuninstall();\""
+        "postinstall": "node hooks/postinstall.js",
+        "preuninstall": "node hooks/preuninstall.js"
     },
     "repository": {
         "type": "git",
