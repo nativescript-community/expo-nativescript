@@ -76,6 +76,12 @@ module.exports = function (hookArgs) {
         return;
     }
 
+    /**
+     * From here, we read from the existing settings.gradle, in case the user has written their own changes into it.
+     * Of interest, the original (template, before interpolation of values like __PROJECT_NAME__) comes from:
+     * @see @nativescript/android/framework/settings.gradle
+     */
+
     /** @type {string} */
     let settingsGradleContents;
     try {
