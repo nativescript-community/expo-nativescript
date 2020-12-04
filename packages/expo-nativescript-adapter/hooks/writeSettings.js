@@ -32,7 +32,7 @@ module.exports = function(args){
     const settingsGradlePath = path.resolve(androidFolder, "settings.gradle");
     const installationAdvice = `After having added your Android platform (i.e. via \`tns platform add android\`), please run \`ns plugin add ${moduleLabel}\` again so that this hook can ensure that '${packageLabel}' gets included into your automatically-generated 'settings.gradle' file.`;
 
-    testCase(failedTestAssertionMessage);
+    testCase(matchExp, injectedBlock, failedTestAssertionMessage);
 
     /**
      * From here, we read from the existing settings.gradle, in case the user has written their own changes into it.
@@ -61,7 +61,7 @@ module.exports = function(args){
             console.log(`${logLabel} Successfully ran hook; '${packageLabel}' was already found to be absent from settings.gradle (so no need to remove it).`);
             return;
         }
-        
+
         // Hasn't been injected yet.
         updatedSettingsGradleContents = settingsGradleContents + "\n\n" + injectedBlock + "\n";
     } else {
@@ -105,11 +105,11 @@ module.exports = function(args){
 /**
  * TODO: Split this out and run it as part of the repo's tests, rather than in advance of actual work.
  */
-function testCase(matchExp, contents, failedTestAssertionMessage){
+function testCase(matchExp, injectedBlock, failedTestAssertionMessage){
     const prefix = `rootProject.name = "plugindemoreact"\ninclude ':app'//, ':runtime', ':runtime-binding-generator'`;
     const suffix = `//project(':runtime-binding-generator').projectDir = new File("\${System.env.ANDROID_RUNTIME_HOME}/test-app/runtime-binding-generator")\n//project(':runtime').projectDir = new File("\${System.env.ANDROID_RUNTIME_HOME}/test-app/runtime")`;
 
-    const matchingCase = [prefix, contents, suffix].join("\n");
+    const matchingCase = [prefix, injectedBlock, suffix].join("\n");
     const missingCase = [prefix, suffix].join("\n");
 
     const matchingCaseMatches = matchingCase.match(matchExp);
@@ -118,5 +118,5 @@ function testCase(matchExp, contents, failedTestAssertionMessage){
     console.assert(missingCaseMatches === null, failedTestAssertionMessage);
     console.assert(matchingCaseMatches !== null, failedTestAssertionMessage);
     console.assert(matchingCaseMatches.length === 3, failedTestAssertionMessage);
-    console.assert(matchingCaseMatches[0] === contents, failedTestAssertionMessage);
+    console.assert(matchingCaseMatches[0] === injectedBlock, failedTestAssertionMessage);
 }
