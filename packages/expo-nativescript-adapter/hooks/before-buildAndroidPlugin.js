@@ -48,17 +48,19 @@ function testCase(){
  * @see https://github.com/NativeScript/nativescript-cli/blob/master/extending-cli.md
  */
 module.exports = function (hookArgs) {
-    if(!hookArgs.ProjectData){
-        console.warn(`${logLabel} Unable to run hook, as hookArgs.ProjectData was unexpectedly falsy.`);
+    // console.log(`${logLabel} hookArgs`, hookArgs);
+
+    if(!hookArgs.projectData){
+        console.warn(`${logLabel} Unable to run hook, as hookArgs.projectData was unexpectedly falsy.`);
         return;
     }
 
-    if(!hookArgs.ProjectData.platformsDir){
-        console.warn(`${logLabel} Unable to run hook, as hookArgs.ProjectData.platformsDir was unexpectedly falsy.`);
+    if(!hookArgs.projectData.platformsDir){
+        console.warn(`${logLabel} Unable to run hook, as hookArgs.projectData.platformsDir was unexpectedly falsy.`);
         return;
     }
 
-    const androidFolder = path.resolve(hookArgs.ProjectData.platformsDir, "android");
+    const androidFolder = path.resolve(hookArgs.projectData.platformsDir, "android");
     const settingsGradlePath = path.resolve(androidFolder, "settings.gradle");
     const installationAdvice = `After having added your Android platform (i.e. via \`tns platform add android\`), please run \`ns plugin add @nativescript-community/expo-nativescript-adapter\` again so that this hook can ensure that 'unimodules-core' gets included into your automatically-generated 'settings.gradle' file.`;
 
@@ -73,6 +75,12 @@ module.exports = function (hookArgs) {
         console.warn(`${logLabel} Unable to run hook, as failed to read settings.gradle file at "${settingsGradlePath}". ${installationAdvice}`);
         return;
     }
+
+    /**
+     * From here, we read from the existing settings.gradle, in case the user has written their own changes into it.
+     * Of interest, the original (template, before interpolation of values like __PROJECT_NAME__) comes from:
+     * @see @nativescript/android/framework/settings.gradle
+     */
 
     /** @type {string} */
     let settingsGradleContents;
@@ -107,7 +115,7 @@ module.exports = function (hookArgs) {
         const suffix = settingsGradleContents.slice(indexOfMatch + lengthOfMatch);
         console.assert(settingsGradleContents === [prefix, fullMatch, suffix].join(""), `${logLabel} Regex matching and string manipulation didn't work as expected. Will not run hook.`);
 
-        updatedSettingsGradleContents = [prefix, injectedBlock, suffix].join("\n");
+        updatedSettingsGradleContents = [prefix, injectedBlock, suffix].join("");
     }
 
     if(settingsGradleContents === updatedSettingsGradleContents){
@@ -116,7 +124,7 @@ module.exports = function (hookArgs) {
     }
 
     try {
-        fs.writeFileSync(settingsGradlePath, settingsGradleContents);
+        fs.writeFileSync(settingsGradlePath, updatedSettingsGradleContents);
         console.log(`${logLabel} Successfully ran hook; 'unimodules-core' is now included in settings.gradle (and will be available upon building your app).`);
     } catch (error) {
         console.error(`${logLabel} Unable to run hook due to unexpected error overwriting settings.gradle file at "${settingsGradlePath}". ${installationAdvice}`, error);
