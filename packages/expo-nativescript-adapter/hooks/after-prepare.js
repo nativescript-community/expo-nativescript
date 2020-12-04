@@ -48,7 +48,7 @@ function testCase(){
  * @see https://github.com/NativeScript/nativescript-cli/blob/master/extending-cli.md
  */
 module.exports = function (hookArgs) {
-    console.log(`${logLabel} hookArgs`, hookArgs);
+    // console.log(`${logLabel} hookArgs`, hookArgs);
 
     if(!hookArgs.projectData){
         console.warn(`${logLabel} Unable to run hook, as hookArgs.projectData was unexpectedly falsy.`);
@@ -109,7 +109,7 @@ module.exports = function (hookArgs) {
         const suffix = settingsGradleContents.slice(indexOfMatch + lengthOfMatch);
         console.assert(settingsGradleContents === [prefix, fullMatch, suffix].join(""), `${logLabel} Regex matching and string manipulation didn't work as expected. Will not run hook.`);
 
-        updatedSettingsGradleContents = [prefix, injectedBlock, suffix].join("\n");
+        updatedSettingsGradleContents = [prefix, injectedBlock, suffix].join("");
     }
 
     if(settingsGradleContents === updatedSettingsGradleContents){
@@ -118,7 +118,7 @@ module.exports = function (hookArgs) {
     }
 
     try {
-        fs.writeFileSync(settingsGradlePath, settingsGradleContents);
+        fs.writeFileSync(settingsGradlePath, updatedSettingsGradleContents);
         console.log(`${logLabel} Successfully ran hook; 'unimodules-core' is now included in settings.gradle (and will be available upon building your app).`);
     } catch (error) {
         console.error(`${logLabel} Unable to run hook due to unexpected error overwriting settings.gradle file at "${settingsGradlePath}". ${installationAdvice}`, error);
