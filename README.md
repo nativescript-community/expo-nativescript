@@ -62,3 +62,7 @@ npm run publish-packages
 - You will then be given a brief sanity check 🧠😊
 
 <h3 align="center">Made with ❤️</h3>
+
+## Why don't we hoist `@nativescript/android` and `@nativescript/ios` in this monorepo?
+
+See https://github.com/NativeScript/nativescript-cli/issues/5444

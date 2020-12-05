@@ -9,10 +9,8 @@
 		"@angular/platform-browser": "file:../../node_modules/@angular/platform-browser",
 		"@angular/platform-browser-dynamic": "file:../../node_modules/@angular/platform-browser-dynamic",
 		"@angular/router": "file:../../node_modules/@angular/router",
-		"@nativescript/android": "file:../../node_modules/@nativescript/android",
 		"@nativescript/angular": "file:../../node_modules/@nativescript/angular",
 		"@nativescript/core": "file:../../node_modules/@nativescript/core",
-		"@nativescript/ios": "file:../../node_modules/@nativescript/ios",
 		"@unimodules/core": "file:../../node_modules/@unimodules/core",
 		"expo-contacts": "file:../../node_modules/expo-contacts",
 		"expo-permissions": "file:../../node_modules/expo-permissions",
@@ -28,6 +26,8 @@
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "file:../../node_modules/@angular/compiler-cli",
+        "@nativescript/android": "7.0.1",
+        "@nativescript/ios": "7.0.6",
 		"@nativescript/webpack": "~3.0.0",
 		"@ngtools/webpack": "file:../../node_modules/@ngtools/webpack",
 		"typescript": "file:../../node_modules/typescript"
