@@ -1,16 +1,16 @@
 /// <reference path="./typings/objc!UMCore.d.ts" />
 
-import { UMNativeModulesProxyBase, methodInfoArgumentsCountKey, methodInfoNameKey, methodInfoKeyKey, MethodInfo } from "./UMNativeModulesProxyCommon";
+import { UMNativeModulesProxyBase, methodInfoArgumentsCountKey, methodInfoNameKey, methodInfoKeyKey, MethodInfo, modulesConstantsKey, viewManagersNamesKey, exportedMethodsKey } from "./UMNativeModulesProxyCommon";
 import type { ExpoEvent } from "./UMNativeModulesProxyCommon";
 
 class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     /* TODO */
     // private readonly viewManagerClassesRegistry: UMViewManagerAdapterClassesRegistry = UMViewManagerAdapterClassesRegistry.alloc().init();
-    private readonly provider: UMModuleRegistryProvider = UMModuleRegistryProvider.alloc().init();
+    // private readonly provider: UMModuleRegistryProvider = UMModuleRegistryProvider.alloc().init();
     private readonly moduleRegistry: UMModuleRegistry;
     private internalServicesModule?: InternalServicesModule;
 
-    constructor(){
+    constructor(private provider: UMModuleRegistryProvider){
         super();
         
         this.moduleRegistry = this.provider.moduleRegistry();
@@ -49,7 +49,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
             const module: UMExportedModule = exportedModules[i];
             const moduleName: string = UMExportedModule.exportedModuleName.apply(module.constructor);
             this.moduleExports[moduleName] = {};
-            this.constantsToExport.exportedMethods[moduleName] = [];
+            this.constantsToExport[exportedMethodsKey][moduleName] = [];
 
             this.initialiseExportedMethods(module, moduleName);
             this.initialiseExportedConstants(module, moduleName);
@@ -58,7 +58,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         const viewManagers: NSArray<UMViewManager> = this.moduleRegistry.getAllViewManagers();
         for(let i = 0; i < viewManagers.count; i++){
             const module: UMViewManager = viewManagers[i];
-            this.constantsToExport.viewManagersNames.push(module.viewName());
+            this.constantsToExport[viewManagersNamesKey].push(module.viewName());
         }
     }
 
@@ -73,18 +73,18 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     private initialiseExportedConstants(module: UMExportedModule, moduleName: string): void {
         const constants: NSDictionary<string, any>|null = module.constantsToExport();
         if(constants === null){
-            this.constantsToExport.modulesConstants[moduleName] = null;
+            this.constantsToExport[modulesConstantsKey][moduleName] = null;
             return;
         }
 
-        this.constantsToExport.modulesConstants[moduleName] = {};
+        this.constantsToExport[modulesConstantsKey][moduleName] = {};
         constants.enumerateKeysAndObjectsUsingBlock((key: string, value: string, stop: interop.Reference<boolean>) => {
-            this.constantsToExport.modulesConstants[moduleName][key] = value;
+            this.constantsToExport[modulesConstantsKey][moduleName][key] = value;
         });
 
         const constantsKeys: NSArray<string> = constants.allKeys;
-        for(let j = 0; j < constantsKeys.count; j++){
-            const constantKey: string = constantsKeys[j];
+        for(let i = 0; i < constantsKeys.count; i++){
+            const constantKey: string = constantsKeys[i];
             if(!this.moduleExports[moduleName].constants){
                 this.moduleExports[moduleName].constants = {};
             }
@@ -110,7 +110,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
             if(!this.moduleExports[moduleName].methods){
                 this.moduleExports[moduleName].methods = {};
             }
-            this.constantsToExport.exportedMethods[moduleName].push({
+            this.constantsToExport[exportedMethodsKey][moduleName].push({
                 [methodInfoNameKey]: exportedName,
                 // - 3 is for resolver and rejecter of the Promise and the last, empty component
                 [methodInfoArgumentsCountKey]: selectorName.split(":").length - 3,
@@ -151,7 +151,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
                 });
             };
         });
-        this.assignExportedMethodsKeys(this.constantsToExport.exportedMethods[moduleName], moduleName);
+        this.assignExportedMethodsKeys(this.constantsToExport[exportedMethodsKey][moduleName], moduleName);
     }
 
     private assignExportedMethodsKeys(exportedMethods: MethodInfo[], moduleName: string) {
@@ -171,7 +171,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
 
             const methodName: string = methodInfo[methodInfoNameKey];
             const previousMethodKey: number|undefined = this.exportedMethodsKeys[moduleName][methodName];
-            // The truthy check is accurate here. We want both undefined values, and values of 0, to evaluate as false for consistency with the React Native adapter implementation.
+            // The truthy check is accurate here. We want both undefined values, and values of 0, to evaluate as false for consistency with the React Native iOS adapter implementation.
             if(previousMethodKey){
                 methodInfo[methodInfoKeyKey] = previousMethodKey;
             } else {
@@ -262,5 +262,5 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     }
 }
 
-export const umNativeModulesProxy = new UMNativeModulesProxy();
+export const umNativeModulesProxy = new UMNativeModulesProxy(UMModuleRegistryProvider.alloc().init());
 export type { ExpoEvent };

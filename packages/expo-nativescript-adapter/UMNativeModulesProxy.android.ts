@@ -20,6 +20,7 @@ import type {
     NativeModule,
 } from "./android-adapter/nativeTypeAliases.android";
 import { NativeScriptModuleRegistryProvider } from "./android-adapter/NativeScriptModuleRegistryProvider.android";
+import { NativeScriptContext } from "./NativeScriptContext.android";
 
 /**
  * @see NativeModulesProxy.java
@@ -27,16 +28,33 @@ import { NativeScriptModuleRegistryProvider } from "./android-adapter/NativeScri
 class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     /* TODO */
     // private readonly viewManagerClassesRegistry: UMViewManagerAdapterClassesRegistry = UMViewManagerAdapterClassesRegistry.alloc().init();
-    private readonly provider: UMModuleRegistryProvider = UMModuleRegistryProvider.alloc().init();
     private readonly moduleRegistry: org.unimodules.core.ModuleRegistry;
     private internalServicesModule?: InternalServicesModule;
 
     private static readonly UNEXPECTED_ERROR: string = "E_UNEXPECTED_ERROR";
 
-    constructor(){
+    constructor(private provider: NativeScriptModuleRegistryProvider){
         super();
         
-        // TODO
+        this.moduleRegistry = this.provider.get(new NativeScriptContext());
+        this.moduleRegistry.initialize();
+
+        this.moduleRegistry.ensureIsInitialized(); // Likely redundant – but seen in getConstants()
+        const exportedModules: Collection<ExportedModule> = this.moduleRegistry.getAllExportedModules();
+        exportedModules.forEach((module: ExportedModule) => {
+            const moduleName: string = module.getName();
+            this.moduleExports[moduleName] = {};
+            this.constantsToExport[exportedMethodsKey][moduleName] = [];
+    
+            this.initialiseExportedMethods(module, moduleName);
+            this.initialiseExportedConstants(module, moduleName);
+        });
+
+        const viewManagers: Collection<ViewManager> = this.moduleRegistry.getAllViewManagers();
+        viewManagers.forEach((module: ViewManager) => {
+            const moduleName: string = module.getName();
+            this.constantsToExport[viewManagersNamesKey].push(moduleName);
+        });
 
         // necessary when extending TypeScript constructors
         return global.__native(this);
@@ -57,45 +75,103 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         return this.moduleExports[moduleName].constants[constantName];
     }
 
-    getConstants(): java.util.Map<string, any> {
-        this.moduleRegistry.ensureIsInitialized();
-        const exportedModules: Collection<ExportedModule> = this.moduleRegistry.getAllExportedModules();
-        const viewManagers: Collection<ViewManager> = this.moduleRegistry.getAllViewManagers();
-    
-        const modulesConstants: java.util.Map<string, any> = new java.util.HashMap(exportedModules.size());
-        const exportedMethodsMap: java.util.Map<string, any> = new java.util.HashMap(exportedModules.size());
-        const viewManagersNames: List<string> = new java.util.ArrayList(viewManagers.size());
+    private initialiseExportedMethods(module: ExportedModule, moduleName: string): void {
+        const methods: java.util.Map<string, java.lang.reflect.Method>|null = module.getExportedMethods();
+        if(methods === null){
+            console.warn(`module.getExportedMethods() returned null for moduleName "${moduleName}"`);
+            return;
+        }
 
-        exportedModules.forEach((exportedModule: ExportedModule) => {
-            const moduleName: string = exportedModule.getName();
-            modulesConstants.put(moduleName, exportedModule.getConstants());
-      
-            const exportedMethods: List<java.util.Map<string, any>> = this.transformExportedMethodsMap(exportedModule.getExportedMethods());
-            this.assignExportedMethodsKeys(moduleName, exportedMethods);
-      
-            exportedMethodsMap.put(moduleName, exportedMethods);
+        const methodInfos: MethodInfo[] = new Array(methods.size());
+        methods.entrySet().forEach((entry: java.util.Map.Entry<string, java.lang.reflect.Method>) => {
+            const exportedName: string = entry.getKey();
+            const method: java.lang.reflect.Method = entry.getValue();
+
+            if(!this.moduleExports[moduleName].methods){
+                this.moduleExports[moduleName].methods = {};
+            }
+
+            if(!this.moduleExports[moduleName].methods){
+                this.moduleExports[moduleName].methods = {};
+            }
+
+
+            methodInfos.push({
+                [methodInfoNameKey]: exportedName,
+                // - 1 is for the Promise
+                [methodInfoArgumentsCountKey]: method.getParameterTypes().length - 1,
+            });
+
+            this.moduleExports[moduleName].methods[exportedName] = function callNativeMethod<T = unknown>(): Promise<T> {
+                const argumentsArray: any[] = Array.from(arguments);
+                const argumentsCollection: Collection<any> = new java.util.ArrayList(argumentsArray.length + 1);
+                for(let i = 0; i < argumentsArray.length; i++){
+                    argumentsCollection.add(argumentsArray[i]);
+                }
+                
+                return new Promise<T>((resolve, reject) => {
+                    try {
+                        argumentsCollection.add(new PromiseWrapper<T>(resolve, reject));
+                        module.invokeExportedMethod(
+                            exportedName,
+                            argumentsCollection,
+                        )
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            };
         });
 
-        viewManagers.forEach((viewManager: ViewManager) => {
-            viewManagersNames.add(viewManager.getName());
-        });
-    
-        const constants: java.util.Map<string, any> = new java.util.HashMap(2);
-        constants.put(modulesConstantsKey, modulesConstants);
-        constants.put(exportedMethodsKey, exportedMethodsMap);
-        constants.put(viewManagersNamesKey, viewManagersNames);
-
-        return constants;
+        this.assignExportedMethodsKeys(methodInfos, moduleName);
     }
 
-    /**
-     * The only exported {@link ReactMethod}.
-     * JavaScript can call native modules' exported methods ({@link ExpoMethod}) using this method as a proxy.
-     * For native {@link ExpoMethod} `void put(String key, int value)` in `NativeDictionary` module
-     * JavaScript could call `NativeModulesProxy.callMethod("NativeDictionary", "put", ["key", 42])`
-     * or `NativeModulesProxy.callMethod("NativeDictionary", 2, ["key", 42])`, where the second argument
-     * is a method's constant key.
-     */
+    private assignExportedMethodsKeys(exportedMethods: MethodInfo[], moduleName: string) {
+        if(!this.exportedMethodsKeys[moduleName]){
+            this.exportedMethodsKeys[moduleName] = {};
+        }
+        if(!this.exportedMethodsReverseKeys[moduleName]){
+            this.exportedMethodsReverseKeys[moduleName] = {};
+        }
+        for(let i = 0; i < exportedMethods.length; i++){
+            const methodInfo = exportedMethods[i];
+
+            if(typeof methodInfo[methodInfoNameKey] !== "string"){
+                throw new Error(`Empty method name in method info: Method info of a method in module ${moduleName} has no method name.`);
+            }
+
+            const methodName: string = methodInfo[methodInfoNameKey];
+            const previousIndex: number|undefined = this.exportedMethodsKeys[moduleName][methodName];
+            // The strict check is accurate here, for consistency with the React Native Android adapter implementation.
+            if(typeof previousIndex === "number"){
+                const newKey: number = Object.keys(this.exportedMethodsKeys[moduleName]).length;
+                methodInfo[methodInfoKeyKey] = newKey;
+                this.exportedMethodsKeys[moduleName][methodName] = newKey;
+                this.exportedMethodsReverseKeys[moduleName][newKey] = methodName;
+            } else {
+                methodInfo[methodInfoKeyKey] = previousIndex;
+            }
+        }
+    }
+
+    private initialiseExportedConstants(module: ExportedModule, moduleName: string): void {
+        const constants: java.util.Map<string, any>|null = module.getConstants();
+        if(constants === null){
+            this.constantsToExport[modulesConstantsKey][moduleName] = null;
+            return;
+        }
+
+        this.constantsToExport[modulesConstantsKey][moduleName] = {};
+        constants.forEach((key: string, value: any) => {
+            this.constantsToExport[modulesConstantsKey][moduleName][key] = value;
+
+            if(!this.moduleExports[moduleName].constants){
+                this.moduleExports[moduleName].constants = {};
+            }
+            this.moduleExports[moduleName].constants[key] = value;
+        });     
+    }
+
     callMethod(moduleName: string, methodKeyOrName: number|string, ...args: string[]): Promise<unknown> {
         let methodName: string;
         if(typeof methodKeyOrName === "string"){
@@ -152,5 +228,82 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     }
 }
 
-export const umNativeModulesProxy = new UMNativeModulesProxy();
+@NativeClass
+class PromiseWrapper<T> extends org.unimodules.core.Promise {
+    private readonly _resolve: (value?: T | PromiseLike<T>) => void;
+    private readonly _reject: (reason?: any) => void;
+
+    constructor(
+        resolve: (value?: T | PromiseLike<T>) => void,
+        reject: (reason?: any) => void,
+    ){
+        super();
+
+        this._resolve = resolve;
+        this._reject = reject;
+
+        // necessary when extending TypeScript constructors
+        return global.__native(this);
+    }
+
+    resolve(value: T): void {
+        this._resolve(value);
+    }
+
+    reject(code: string, message: string, throwable: java.lang.Throwable): void; // 0
+    reject(throwable: java.lang.Throwable): void; // 1
+    reject(code: string, message: string): void; // 2
+    reject(code: string, throwable: java.lang.Throwable): void; // 3
+    reject(
+        codeOrThrowable: string|java.lang.Throwable,
+        messageOrThrowable?: string|java.lang.Throwable,
+        throwable?: java.lang.Throwable,
+    ): void {
+        const sw: java.io.StringWriter = new java.io.StringWriter();
+        const pw: java.io.PrintWriter = new java.io.PrintWriter(sw);
+
+        let optionalCode: string|undefined;
+        let optionalMessage: string|undefined;
+        let optionalThrowable: java.lang.Throwable|undefined;
+
+        if(typeof codeOrThrowable === "string"){
+            // Overload 0|2|3
+            optionalCode = codeOrThrowable;
+            if(typeof messageOrThrowable === "string"){
+                // Overload 0|2
+                optionalMessage = messageOrThrowable;
+                if(typeof throwable === "undefined"){
+                    // Overload 2
+                } else {
+                    // Overload 0
+                    optionalThrowable = throwable;
+                }
+            } else if(typeof messageOrThrowable !== "undefined"){
+                // Overload 3
+                optionalThrowable = messageOrThrowable;
+            }
+        } else {
+            // Overload 1
+            optionalThrowable = codeOrThrowable;
+        }
+
+        if(optionalThrowable){
+            optionalThrowable.printStackTrace(pw);
+        }
+
+        const error = new Error(optionalMessage || "Unknown error");
+        error.name = "EXPO_MODULE_ERROR";
+        /* Let's not set the code, for now. */
+        // if(optionalCode){
+        //     (error as any).code = optionalCode;
+        // }
+
+        this._reject(error);
+    }
+}
+
+export const umNativeModulesProxy = new UMNativeModulesProxy(
+    // TODO
+    new NativeScriptModuleRegistryProvider(new java.util.ArrayList())
+);
 export type { ExpoEvent };

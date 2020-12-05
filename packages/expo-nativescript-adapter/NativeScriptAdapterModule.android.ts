@@ -24,27 +24,27 @@ import type {
 } from "./android-adapter/nativeTypeAliases.android";
 import { NativeScriptContext } from "./NativeScriptContext.android";
 
-class ExpoFlutterAdapterPlugin {
-    private static sRegistrar: Registrar;
+// class ExpoFlutterAdapterPlugin {
+//     private static sRegistrar: Registrar;
 
-    public static registerWith(Registrar registrar): void {
-        sRegistrar = registrar;
-    }
+//     public static registerWith(Registrar registrar): void {
+//         sRegistrar = registrar;
+//     }
 
-    public static addPackages(packages: List<Package>): void {
-        ExpoFlutterAdapterModule.addPackages(packages);
-    }
+//     public static addPackages(packages: List<Package>): void {
+//         ExpoFlutterAdapterModule.addPackages(packages);
+//     }
 
-    public static addPackage(Package pkg): void {
-        ExpoFlutterAdapterModule.addPackage(pkg);
-    }
+//     public static addPackage(Package pkg): void {
+//         ExpoFlutterAdapterModule.addPackage(pkg);
+//     }
 
-    public static initialize(): void {
-        // Just create an instance of the module. We don't need to hold a reference to it anywhere --
-        // it'll register itself to the `FlutterView` etc. to maintain its lifetime.
-        new ExpoFlutterAdapterModule(sRegistrar);
-    }
-}
+//     public static initialize(): void {
+//         // Just create an instance of the module. We don't need to hold a reference to it anywhere --
+//         // it'll register itself to the `FlutterView` etc. to maintain its lifetime.
+//         new ExpoFlutterAdapterModule(sRegistrar);
+//     }
+// }
 
 class NativeScriptRegistrar {
 
@@ -136,4 +136,4 @@ class ExpoNativeScriptAdapterModule extends java.lang.Object implements Internal
     }
 }
 
-export { ExpoFlutterAdapterModule };
+export { ExpoNativeScriptAdapterModule };
