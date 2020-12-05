@@ -24,6 +24,7 @@ import { NativeScriptContext } from "./NativeScriptContext.android";
 
 /**
  * @see NativeModulesProxy.java
+ * @see expo-flutter-adapter.java
  */
 class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     /* TODO */
@@ -60,19 +61,22 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         return global.__native(this);
     }
 
-    getConstant(moduleName: string, constantName: string): unknown {
-        if(!this.moduleExports[moduleName]){
-            const error = new Error(`No exported module was found for the name "${moduleName}". Are you sure all the packages are linked correctly?`);
-            error.name = "E_NO_MODULE";
-            throw error;
-        }
-        if(!this.moduleExports[moduleName].constants){
-            const error = new Error(`Module "${moduleName}" does not export any constants; unable to look up constant "${constantName}".`);
-            error.name = "E_NO_CONSTANTS";
-            throw error;
+    private initialiseExportedConstants(module: ExportedModule, moduleName: string): void {
+        const constants: java.util.Map<string, any>|null = module.getConstants();
+        if(constants === null){
+            this.constantsToExport[modulesConstantsKey][moduleName] = null;
+            return;
         }
 
-        return this.moduleExports[moduleName].constants[constantName];
+        this.constantsToExport[modulesConstantsKey][moduleName] = {};
+        constants.forEach((key: string, value: any) => {
+            this.constantsToExport[modulesConstantsKey][moduleName][key] = value;
+
+            if(!this.moduleExports[moduleName].constants){
+                this.moduleExports[moduleName].constants = {};
+            }
+            this.moduleExports[moduleName].constants[key] = value;
+        });     
     }
 
     private initialiseExportedMethods(module: ExportedModule, moduleName: string): void {
@@ -154,24 +158,6 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         }
     }
 
-    private initialiseExportedConstants(module: ExportedModule, moduleName: string): void {
-        const constants: java.util.Map<string, any>|null = module.getConstants();
-        if(constants === null){
-            this.constantsToExport[modulesConstantsKey][moduleName] = null;
-            return;
-        }
-
-        this.constantsToExport[modulesConstantsKey][moduleName] = {};
-        constants.forEach((key: string, value: any) => {
-            this.constantsToExport[modulesConstantsKey][moduleName][key] = value;
-
-            if(!this.moduleExports[moduleName].constants){
-                this.moduleExports[moduleName].constants = {};
-            }
-            this.moduleExports[moduleName].constants[key] = value;
-        });     
-    }
-
     callMethod(moduleName: string, methodKeyOrName: number|string, ...args: string[]): Promise<unknown> {
         let methodName: string;
         if(typeof methodKeyOrName === "string"){
@@ -218,6 +204,22 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         //     return Promise.reject(error);
         // }
     }
+
+    getConstant(moduleName: string, constantName: string): unknown {
+        if(!this.moduleExports[moduleName]){
+            const error = new Error(`No exported module was found for the name "${moduleName}". Are you sure all the packages are linked correctly?`);
+            error.name = "E_NO_MODULE";
+            throw error;
+        }
+        if(!this.moduleExports[moduleName].constants){
+            const error = new Error(`Module "${moduleName}" does not export any constants; unable to look up constant "${constantName}".`);
+            error.name = "E_NO_CONSTANTS";
+            throw error;
+        }
+
+        return this.moduleExports[moduleName].constants[constantName];
+    }
+
     get events(): ExpoEvent[] {
         if(this._events === null){
             // TODO: Not sure how to set up events.
