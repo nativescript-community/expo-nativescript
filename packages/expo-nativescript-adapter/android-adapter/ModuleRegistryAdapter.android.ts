@@ -1,4 +1,4 @@
-/// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
+/// <reference path="../typings/java!android-17-core-5.5.1.d.ts" />
 import { ModuleRegistryReadyNotifier } from "./ModuleRegistryReadyNotifier.android";
 import { NativeScriptAdapterPackage } from "./NativeScriptAdapterPackage.android";
 import { NativeScriptModuleRegistryProvider } from "./NativeScriptModuleRegistryProvider.android";

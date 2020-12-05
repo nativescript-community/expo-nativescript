@@ -1,4 +1,4 @@
-/// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
+/// <reference path="../typings/java!android-17-core-5.5.1.d.ts" />
 import { NativeScriptModuleRegistryProvider } from "./NativeScriptModuleRegistryProvider.android";
 import type {
     ExportedModule,
