@@ -33,12 +33,45 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     private internalServicesModule?: InternalServicesModule;
 
     private static readonly UNEXPECTED_ERROR: string = "E_UNEXPECTED_ERROR";
+    /**
+     * Each NativeScript-adapted Expo plugin must call UMNativeModulesProxy.addPackage() to add
+     * the corresponding Expo package (e.g. expo-permissions) to this list of packages.
+     * 
+     * The one thing we need to be careful to coordinate is that this array must be populated by
+     * the time we construct this instance. This may require moving logic out of the constructor
+     * and performing a post-init operation instead.
+     * 
+     * @see ReactPackagesProvider.java to see how to decouple it from NativeModulesProxy.
+     * @see ExpoPermissionsPlugin
+     * @example
+        public class ExpoPermissionsPlugin {
+            public static void registerWith(Registrar registrar) {
+                ExpoFlutterAdapterPlugin.addPackage(new PermissionsPackage());
+            }
+        }
+     */
+    private static readonly sInitialPackages: List<Package> = new java.util.ArrayList();
+
+    static addPackages(packages: List<Package>): void {
+        UMNativeModulesProxy.sInitialPackages.addAll(packages);
+    }
+
+    static addPackage(pkg: Package): void {
+        UMNativeModulesProxy.sInitialPackages.add(pkg);
+    }
+
+    // ExpoFlutterAdapterPlugin.addPackage(new PermissionsPackage());
 
     constructor(private provider: NativeScriptModuleRegistryProvider){
         super();
         
         this.moduleRegistry = this.provider.get(new NativeScriptContext());
         this.moduleRegistry.initialize();
+
+        /**
+         * TODO: handle InternalModules
+         * @see ReactModuleRegistryProvider.java
+         */
 
         this.moduleRegistry.ensureIsInitialized(); // Likely redundant – but seen in getConstants()
         const exportedModules: Collection<ExportedModule> = this.moduleRegistry.getAllExportedModules();
@@ -305,7 +338,11 @@ class PromiseWrapper<T> extends org.unimodules.core.Promise {
 }
 
 export const umNativeModulesProxy = new UMNativeModulesProxy(
-    // TODO
+    /**
+     * TODO: Pass in a non-empty list of Packages.
+     * @see NativeScriptAdapterModule.java
+     * @see expo-flutter-adapter.java
+     */
     new NativeScriptModuleRegistryProvider(new java.util.ArrayList())
 );
 export type { ExpoEvent };
