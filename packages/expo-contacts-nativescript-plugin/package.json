@@ -4,7 +4,12 @@
     "description": "Expo Contacts, adapted for NativeScript.",
     "main": "Contacts",
     "typings": "Contacts.d.ts",
-    "nativescript": {},
+    "nativescript": {
+        "platforms": {
+            "ios": "7.0.6",
+            "android": "7.0.1"
+        }
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/nativescript-community/expo-nativescript.git"
