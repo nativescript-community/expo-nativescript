@@ -80,7 +80,7 @@ export abstract class UMNativeModulesProxyBase {
     protected readonly exportedMethodsKeys: ExportedMethodsKeys = {};
     protected readonly exportedMethodsReverseKeys: ExportedMethodsReverseKeys = {};
 
-    abstract callMethod(moduleName: string, methodName: string, ...args: any[]): any;
+    abstract callMethod(moduleName: string, methodKeyOrName: number|string, ...args: any[]): any;
     abstract getConstant(moduleName: string, constantName: string): any;
     protected _events: ExpoEvent[]|null = null;
     abstract get events(): ExpoEvent[];

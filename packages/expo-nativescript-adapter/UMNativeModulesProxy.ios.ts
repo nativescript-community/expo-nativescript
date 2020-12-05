@@ -196,7 +196,18 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
      * @example NativeModulesProxy.callMethod("ExponentDeviceMotion", "stopObserving");
      * @example NativeModulesProxy.callMethod("ExponentDeviceMotion", "setUpdateInterval", 100);
      */
-    callMethod(moduleName: string, methodName: string, ...args: any[]): Promise<unknown> {
+    callMethod(moduleName: string, methodKeyOrName: number|string, ...args: any[]): Promise<unknown> {
+        let methodName: string;
+        if(typeof methodKeyOrName === "string"){
+            methodName = methodKeyOrName;
+        } else if(typeof methodKeyOrName === "number"){
+            methodName = this.exportedMethodsReverseKeys[moduleName][methodKeyOrName];
+        } else {
+            const error = new Error("Unexpected Error: Method key is neither a string nor a number – don't know how to map it to method name.")
+            error.name = "E_UNEXPECTED_ERROR";
+            return Promise.reject(error);
+        }
+
         if(!this.moduleExports[moduleName]){
             const error = new Error(`No exported module was found for the name "${moduleName}". Are you sure all the packages are linked correctly?`);
             error.name = "E_NO_MODULE";
