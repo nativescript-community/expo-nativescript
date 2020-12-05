@@ -1,7 +1,7 @@
 /// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
 import { UMNativeModulesProxyBase, methodInfoArgumentsCountKey, methodInfoNameKey, methodInfoKeyKey, MethodInfo } from "./UMNativeModulesProxyCommon";
 import type { ExpoEvent } from "./UMNativeModulesProxyCommon";
-import { NativeScriptAdapterPackage } from "./NativeScriptAdapterPackage.android";
+import { NativeScriptAdapterPackage } from "./android-adapter/NativeScriptAdapterPackage.android";
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -18,8 +18,8 @@ import type {
     NativeScriptApplicationContext,
     NativeScriptViewManager,
     NativeModule,
-} from "./nativeTypeAliases.android";
-import { NativeScriptModuleRegistryProvider } from "./NativeScriptModuleRegistryProvider.android";
+} from "./android-adapter/nativeTypeAliases.android";
+import { NativeScriptModuleRegistryProvider } from "./android-adapter/NativeScriptModuleRegistryProvider.android";
 
 /**
  * @see NativeModulesProxy.java
