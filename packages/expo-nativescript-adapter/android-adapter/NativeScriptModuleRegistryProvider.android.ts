@@ -1,4 +1,6 @@
 /// <reference path="../typings/java!android-17-core-5.5.1.d.ts" />
+import { NativeScriptPackage } from "./NativeScriptPackage.android";
+import { NativeScriptPackagesProvider } from "./NativeScriptPackagesProvider.android";
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -38,18 +40,18 @@ class NativeScriptModuleRegistryProvider extends org.unimodules.core.ModuleRegis
         const internalModules: Collection<InternalModule> = new java.util.ArrayList();
         const exportedModules: Collection<ExportedModule> = new java.util.ArrayList();
 
-        // const nativeScriptPackagesProvider: NativeScriptPackagesProvider = new NativeScriptPackagesProvider();
+        const nativeScriptPackagesProvider: NativeScriptPackagesProvider = new NativeScriptPackagesProvider();
 
         this.getPackages().forEach((pkg: Package) => {
             internalModules.addAll(pkg.createInternalModules(context));
             exportedModules.addAll(pkg.createExportedModules(context));
 
-            // if(pkg instanceof NativeScriptPackage){
-            //     nativeScriptPackagesProvider.addPackage(pkg as NativeScriptPackage);
-            // }
+            if(pkg instanceof NativeScriptPackage){
+                nativeScriptPackagesProvider.addPackage(pkg);
+            }
         });
 
-        // internalModules.add(nativeScriptPackagesProvider);
+        internalModules.add(nativeScriptPackagesProvider);
 
         return new org.unimodules.core.ModuleRegistry(
             internalModules,

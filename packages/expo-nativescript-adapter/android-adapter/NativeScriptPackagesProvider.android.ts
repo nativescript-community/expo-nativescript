@@ -21,11 +21,11 @@ import type {
 } from "./nativeTypeAliases.android";
 
 /**
- * Holder for ReactPackages -- visible only to the adapter.
+ * Holder for NativeScriptPackages -- visible only to the adapter.
  * <p>
  * We want to be able to create platform-specific unimodules.
- * Thus, we need a way to pass in ReactPackages via unimodules infrastructure.
- * This internal module is populated with ReactPackages by ReactModuleRegistryProvider
+ * Thus, we need a way to pass in NativeScriptPackages via unimodules infrastructure.
+ * This internal module is populated with NativeScriptPackages by NativeScriptModuleRegistryProvider
  * and is used by ModuleRegistryAdapter when it creates native modules list.
  */
 @NativeClass
