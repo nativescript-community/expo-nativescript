@@ -30,21 +30,11 @@ import type {
  */
 @NativeClass
 class NativeScriptPackagesProvider extends org.unimodules.core.interfaces.InternalModule {
-    private mNativeScriptPackages: Collection<NativeScriptPackage>;
-
-    constructor(){
-        super();
-
-        this.mNativeScriptPackages = new java.util.ArrayList();
-
-        // necessary when extending TypeScript constructors
-        return global.__native(this);
-    }
+    private mNativeScriptPackages: Collection<NativeScriptPackage> = new java.util.ArrayList();
   
     getExportedInterfaces(): List<any> {
         return java.util.Collections.singletonList(NativeScriptPackagesProvider.class);
     }
-  
   
     addPackage(nativeScriptPackage: NativeScriptPackage): void {
         this.mNativeScriptPackages.add(nativeScriptPackage);
