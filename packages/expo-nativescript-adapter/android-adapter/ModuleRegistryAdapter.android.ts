@@ -2,6 +2,8 @@
 import { ModuleRegistryReadyNotifier } from "./ModuleRegistryReadyNotifier.android";
 import { NativeScriptAdapterPackage } from "./NativeScriptAdapterPackage.android";
 import { NativeScriptModuleRegistryProvider } from "./NativeScriptModuleRegistryProvider.android";
+import { NativeScriptPackage } from "./NativeScriptPackage.android";
+import { NativeScriptPackagesProvider } from "./NativeScriptPackagesProvider.android";
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -22,19 +24,10 @@ import type {
 // import NativeModulesProxy from "./NativeModulesProxy";
 
 /**
- * @see com.facebook.react.ReactPackage
- * @see https://github.com/facebook/react-native/blob/d72e078df41f1ba2eb94e4eb4fb28b8d0232a8a1/ReactAndroid/src/main/java/com/facebook/react/ReactPackage.java
- */
-interface NativeScriptPackage {
-    createNativeModules(context: NativeScriptApplicationContext): List<NativeModule>;
-    createViewManagers(context: NativeScriptApplicationContext): List<NativeModule>;
-}
-
-/**
  * @see ModuleRegistryAdapter.java
  */
 @NativeClass
-class ModuleRegistryAdapter extends java.lang.Object implements NativeScriptPackage {
+class ModuleRegistryAdapter extends NativeScriptPackage {
     protected mModuleRegistryProvider: NativeScriptModuleRegistryProvider;
     protected mNativeScriptAdapterPackage: NativeScriptAdapterPackage = new NativeScriptAdapterPackage();
 
@@ -55,8 +48,6 @@ class ModuleRegistryAdapter extends java.lang.Object implements NativeScriptPack
         });
 
         return this.getNativeModulesFromModuleRegistry(context, moduleRegistry);
-    
-        // return getNativeModulesFromModuleRegistry(reactContext, moduleRegistry);
     }
 
     protected getNativeModulesFromModuleRegistry(context: NativeScriptApplicationContext, moduleRegistry: ModuleRegistry): List<NativeModule> {
@@ -68,11 +59,11 @@ class ModuleRegistryAdapter extends java.lang.Object implements NativeScriptPack
         // Add listener that will notify org.unimodules.core.ModuleRegistry when all modules are ready
         nativeModulesList.add(new ModuleRegistryReadyNotifier(moduleRegistry));
     
-        /* TODO: Port ReactPackagesProvider to NativeScript */
-        // const reactPackagesProvider: ReactPackagesProvider = moduleRegistry.getModule(ReactPackagesProvider.class);
-        // reactPackagesProvider.getReactPackages().forEach((reactPackage: ReactPackage) => {
-        //     nativeModulesList.addAll(reactPackage.createNativeModules(context));
-        // });
+        const nativeScriptPackagesProvider: NativeScriptPackagesProvider = moduleRegistry.getModule(NativeScriptPackagesProvider.class);
+        nativeScriptPackagesProvider.getNativeScriptPackages()
+        .forEach((nativeScriptPackage: NativeScriptPackage) => {
+            nativeModulesList.addAll(nativeScriptPackage.createNativeModules(context));
+        });
     
         return nativeModulesList;
     }
