@@ -10,7 +10,11 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     private readonly moduleRegistry: UMModuleRegistry;
     private internalServicesModule?: InternalServicesModule;
 
-    constructor(private provider: UMModuleRegistryProvider){
+    /**
+     * @param provider the Unimodules registry provider.
+     * @param context Android-only; ignored by iOS.
+     */
+    constructor(private provider: UMModuleRegistryProvider, context?: any){
         super();
         
         this.moduleRegistry = this.provider.moduleRegistry();

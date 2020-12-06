@@ -2,7 +2,7 @@ import type { UMNativeModulesProxyBase } from "./UMNativeModulesProxyCommon";
 import type { ExpoEvent } from "./UMNativeModulesProxyCommon";
 
 export declare class UMNativeModulesProxy extends UMNativeModulesProxyBase {
-    constructor(provider: any);
+    constructor(provider: any, context?: any);
     callMethod(moduleName: string, methodName: string, ...args: any[]): Promise<unknown>;
     getConstant(moduleName: string, constantName: string): unknown;
     get events(): ExpoEvent[];

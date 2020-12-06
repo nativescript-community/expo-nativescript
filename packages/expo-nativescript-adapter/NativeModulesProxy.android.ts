@@ -4,6 +4,9 @@ import { exportedMethodsKey, modulesConstantsKey } from "./UMNativeModulesProxyC
 
 const NativeModulesProxy: { [moduleName: string]: ProxyNativeModule } = {};
 
+/**
+ * @see expo-flutter-adapter.java
+ */
 function marshalAndroid(nativeValue: unknown): any {
   throw new Error("marshalAndroid() not yet implemented.");
 }

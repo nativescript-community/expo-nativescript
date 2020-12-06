@@ -42,7 +42,7 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
      * and performing a post-init operation instead.
      * 
      * @see ReactPackagesProvider.java to see how to decouple it from NativeModulesProxy.
-     * @see ExpoPermissionsPlugin
+     * @see ExpoPermissionsPlugin.java
      * @example
         public class ExpoPermissionsPlugin {
             public static void registerWith(Registrar registrar) {
@@ -62,10 +62,10 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
 
     // ExpoFlutterAdapterPlugin.addPackage(new PermissionsPackage());
 
-    constructor(private provider: NativeScriptModuleRegistryProvider){
+    constructor(private provider: NativeScriptModuleRegistryProvider, context: NativeScriptContext){
         super();
         
-        this.moduleRegistry = this.provider.get(new NativeScriptContext());
+        this.moduleRegistry = this.provider.get(context);
         this.moduleRegistry.initialize();
 
         /**
@@ -345,6 +345,7 @@ export const umNativeModulesProxy = new UMNativeModulesProxy(
      * 
      * @see expo/packages/expo-permissions/android/src/main/java/expo/modules/permissions/PermissionsPackage.kt
      */
-    new NativeScriptModuleRegistryProvider(new java.util.ArrayList())
+    new NativeScriptModuleRegistryProvider(new java.util.ArrayList()),
+    new NativeScriptContext(),
 );
 export type { ExpoEvent };
