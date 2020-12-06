@@ -265,6 +265,3 @@ class UMNativeModulesProxy extends UMNativeModulesProxyBase {
         return this._events;
     }
 }
-
-export const umNativeModulesProxy = new UMNativeModulesProxy(UMModuleRegistryProvider.alloc().init());
-export type { ExpoEvent };

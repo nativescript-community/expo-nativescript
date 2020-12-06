@@ -1,7 +1,8 @@
-import { umNativeModulesProxy } from './UMNativeModulesProxy';
+import { UMNativeModulesProxy } from './UMNativeModulesProxy';
 import { ProxyNativeModule } from './NativeModulesProxy.types';
 import { exportedMethodsKey, modulesConstantsKey } from "./UMNativeModulesProxyCommon";
 
+const umNativeModulesProxy = new UMNativeModulesProxy(UMModuleRegistryProvider.alloc().init());
 const NativeModulesProxy: { [moduleName: string]: ProxyNativeModule } = {};
 
 /**

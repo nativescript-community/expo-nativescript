@@ -9,4 +9,3 @@ export declare class UMNativeModulesProxy extends UMNativeModulesProxyBase {
 }
 
 export declare const umNativeModulesProxy: UMNativeModulesProxy;
-export type { ExpoEvent };

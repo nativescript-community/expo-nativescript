@@ -1,7 +1,6 @@
 /// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
 import { UMNativeModulesProxyBase, modulesConstantsKey, exportedMethodsKey, viewManagersNamesKey, methodInfoArgumentsCountKey, methodInfoNameKey, methodInfoKeyKey, MethodInfo } from "./UMNativeModulesProxyCommon";
 import type { ExpoEvent } from "./UMNativeModulesProxyCommon";
-import { NativeScriptAdapterPackage } from "./android-adapter/NativeScriptAdapterPackage.android";
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -336,16 +335,3 @@ class PromiseWrapper<T> extends org.unimodules.core.Promise {
         this._reject(error);
     }
 }
-
-export const umNativeModulesProxy = new UMNativeModulesProxy(
-    /**
-     * TODO: Pass in a non-empty list of Packages.
-     * @see NativeScriptAdapterModule.java
-     * @see expo-flutter-adapter.java
-     * 
-     * @see expo/packages/expo-permissions/android/src/main/java/expo/modules/permissions/PermissionsPackage.kt
-     */
-    new NativeScriptModuleRegistryProvider(new java.util.ArrayList()),
-    new NativeScriptContext(),
-);
-export type { ExpoEvent };
