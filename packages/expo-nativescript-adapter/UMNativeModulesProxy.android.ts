@@ -342,6 +342,8 @@ export const umNativeModulesProxy = new UMNativeModulesProxy(
      * TODO: Pass in a non-empty list of Packages.
      * @see NativeScriptAdapterModule.java
      * @see expo-flutter-adapter.java
+     * 
+     * @see expo/packages/expo-permissions/android/src/main/java/expo/modules/permissions/PermissionsPackage.kt
      */
     new NativeScriptModuleRegistryProvider(new java.util.ArrayList())
 );

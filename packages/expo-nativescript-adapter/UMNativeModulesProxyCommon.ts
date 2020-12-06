@@ -73,9 +73,9 @@ export abstract class UMNativeModulesProxyBase {
      * @see https://github.com/expo/expo/blob/c2f6f870ca5059a9157320c0ba72ce1f38e93f31/packages/%40unimodules/react-native-adapter/ios/UMReactNativeAdapter/UMViewManagerAdapter/UMViewManagerAdapter.h
      */
     readonly constantsToExport: ConstantsToExport = {
-        viewManagersNames: [],
-        exportedMethods: {},
-        modulesConstants: {},
+        [viewManagersNamesKey]: [],
+        [exportedMethodsKey]: {},
+        [modulesConstantsKey]: {},
     };
     protected readonly exportedMethodsKeys: ExportedMethodsKeys = {};
     protected readonly exportedMethodsReverseKeys: ExportedMethodsReverseKeys = {};
