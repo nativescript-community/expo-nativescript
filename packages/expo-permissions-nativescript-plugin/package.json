@@ -27,6 +27,9 @@
         "expo-permissions": "^9.3.0",
         "unimodules-permissions-interface": "^5.3.0"
     },
+    "devDependencies": {
+        "@nativescript-community/expo-nativescript-adapter": "file:../dist/packages/expo-nativescript-adapter"
+    },
     "author": {
         "name": "Jamie Birch",
         "email": "14055146+shirakaba@users.noreply.github.com"
