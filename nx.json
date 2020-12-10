@@ -34,6 +34,9 @@
 		},
 		"expo-contacts-nativescript-plugin": {
 			"tags": []
+		},
+		"expo-nativescript-react-native-shim": {
+			"tags": []
 		}
 	},
 	"workspaceLayout": {

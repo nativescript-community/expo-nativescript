@@ -22,12 +22,13 @@
 		"zone.js": "file:../../node_modules/zone.js",
 		"@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
 		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin",
-		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin"
+		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin",
+		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../dist/packages/expo-nativescript-react-native-shim"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "file:../../node_modules/@angular/compiler-cli",
-        "@nativescript/android": "7.0.1",
-        "@nativescript/ios": "7.0.6",
+		"@nativescript/android": "7.0.1",
+		"@nativescript/ios": "7.0.6",
 		"@nativescript/webpack": "~3.0.0",
 		"@ngtools/webpack": "file:../../node_modules/@ngtools/webpack",
 		"typescript": "file:../../node_modules/typescript"

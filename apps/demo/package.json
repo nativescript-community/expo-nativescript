@@ -13,11 +13,12 @@
 		"expo-permissions": "file:../../node_modules/expo-permissions",
 		"unimodules-file-system-interface": "file:../../node_modules/unimodules-file-system-interface",
 		"unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface",
-		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../packages/expo-contacts-nativescript-plugin"
+		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../packages/expo-contacts-nativescript-plugin",
+		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../packages/expo-nativescript-react-native-shim"
 	},
 	"devDependencies": {
-        "@nativescript/android": "7.0.1",
-        "@nativescript/ios": "7.0.6",
+		"@nativescript/android": "7.0.1",
+		"@nativescript/ios": "7.0.6",
 		"@nativescript/webpack": "~3.0.0",
 		"typescript": "file:../../node_modules/typescript"
 	}

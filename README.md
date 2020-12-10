@@ -9,6 +9,7 @@ npm start
 
 - @nativescript-community/expo-contacts-nativescript-plugin
 - @nativescript-community/expo-nativescript-adapter
+- @nativescript-community/expo-nativescript-react-native-shim
 - @nativescript-community/expo-permissions-nativescript-plugin
 
 # How to use?

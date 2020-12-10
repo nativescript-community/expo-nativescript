@@ -13,6 +13,9 @@ export class HomeComponent {
 			name: 'expo-nativescript-adapter',
 		},
 		{
+			name: 'expo-nativescript-react-native-shim',
+		},
+		{
 			name: 'expo-permissions-nativescript-plugin',
 		},
 	];

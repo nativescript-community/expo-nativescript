@@ -102,6 +102,13 @@ module.exports = {
 					description: '@nativescript-community/expo-contacts-nativescript-plugin: Build',
 				},
 			},
+			// @nativescript-community/expo-nativescript-react-native-shim
+			'expo-nativescript-react-native-shim': {
+				build: {
+					script: 'nx run expo-nativescript-react-native-shim:build.all',
+					description: '@nativescript-community/expo-nativescript-react-native-shim: Build',
+				},
+			},
 			'build-all': {
 				script: 'nx run all:build',
 				description: 'Build all packages',
@@ -123,6 +130,10 @@ module.exports = {
 			'expo-contacts-nativescript-plugin': {
 				script: 'nx run expo-contacts-nativescript-plugin:focus',
 				description: 'Focus on @nativescript-community/expo-contacts-nativescript-plugin',
+			},
+			'expo-nativescript-react-native-shim': {
+				script: 'nx run expo-nativescript-react-native-shim:focus',
+				description: 'Focus on @nativescript-community/expo-nativescript-react-native-shim',
 			},
 			reset: {
 				script: 'nx run all:focus',

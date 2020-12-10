@@ -105,7 +105,7 @@
 					"builder": "@nrwl/workspace:run-commands",
 					"outputs": ["dist/packages"],
 					"options": {
-						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all", "nx run expo-contacts-nativescript-plugin:build.all"],
+						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all", "nx run expo-contacts-nativescript-plugin:build.all", "nx run expo-nativescript-react-native-shim:build.all"],
 						"parallel": false
 					}
 				},
@@ -263,6 +263,49 @@
 					"outputs": ["dist/packages"],
 					"options": {
 						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-contacts-nativescript-plugin"],
+						"parallel": false
+					}
+				}
+			}
+		},
+		"expo-nativescript-react-native-shim": {
+			"root": "packages/expo-nativescript-react-native-shim",
+			"sourceRoot": "packages/expo-nativescript-react-native-shim",
+			"projectType": "library",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"options": {
+						"outputPath": "dist/packages/expo-nativescript-react-native-shim",
+						"tsConfig": "packages/expo-nativescript-react-native-shim/tsconfig.json",
+						"packageJson": "packages/expo-nativescript-react-native-shim/package.json",
+						"main": "packages/expo-nativescript-react-native-shim/index.ts",
+						"assets": [
+							"packages/expo-nativescript-react-native-shim/*.md",
+							"packages/expo-nativescript-react-native-shim/index.d.ts",
+							"LICENSE",
+							{
+								"glob": "**/*",
+								"input": "packages/expo-nativescript-react-native-shim/platforms/",
+								"output": "./platforms/"
+							}
+						]
+					}
+				},
+				"build.all": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-nativescript-react-native-shim:build", "node tools/scripts/build-finish.ts expo-nativescript-react-native-shim"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-nativescript-react-native-shim"],
 						"parallel": false
 					}
 				}

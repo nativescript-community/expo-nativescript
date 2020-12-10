@@ -9,6 +9,7 @@
 <Button text="expo-nativescript-adapter" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
 <Button text="expo-permissions-nativescript-plugin" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
 <Button text="expo-contacts-nativescript-plugin" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+<Button text="expo-nativescript-react-native-shim" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
       </StackLayout>
     </ScrollView>
   </StackLayout>
