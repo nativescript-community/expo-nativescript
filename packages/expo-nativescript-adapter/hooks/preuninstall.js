@@ -29,6 +29,13 @@ if(fs.existsSync(androidDir)){
         matchExp: /(\/\*\* ':unimodules-core' injected support START \*\*\/).*(\/\*\* ':unimodules-core' injected support END \*\*\/)/s,
         injectedBlock: "",
     });
+    try {
+        fs.unlinkSync(path.resolve(platformsDir, "package.json"));
+    } catch (error){
+        if(error.code !== "ENOENT"){
+            console.error(`[${moduleName}] failed to complete preuninstall hook; unable to remove dummy package.json from platforms directory "${platformsDir}".`, error);
+        }
+    }
 } else {
     /*
      * It may well be an iOS-only project, so fine to exit silently here.

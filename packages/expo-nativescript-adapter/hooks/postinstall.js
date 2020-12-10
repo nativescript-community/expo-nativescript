@@ -35,6 +35,16 @@ if(fs.existsSync(androidDir)){
             `/** '${packageName}' injected support END **/`,
         ].join("\n")
     });
+    try {
+        fs.writeFileSync(
+            path.resolve(platformsDir, "package.json"),
+            JSON.stringify({
+                description: "All Expo Unimodules for Android expect this file to exist in order to allow installation! There's nothing more to it."
+            }, null, 4)
+        );
+    } catch (error){
+        console.error(`[${moduleName}] failed to complete postinstall hook; unable to write dummy package.json into platforms directory "${platformsDir}".`, error);
+    }
 } else {
     /*
      * It may well be an iOS-only project, so fine to exit silently here.
