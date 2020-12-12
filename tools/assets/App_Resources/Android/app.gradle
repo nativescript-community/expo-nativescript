@@ -1,8 +1,5 @@
 // Add your native dependencies here:
 
-// include ':unimodules-core'
-// project(':unimodules-core').projectDir = new File(rootProject.projectDir, '../../node_modules/@unimodules/core/android')
-
 // Uncomment to add recyclerview-v7 dependency
 // dependencies {
 // 	compile 'com.android.support:recyclerview-v7:+'
