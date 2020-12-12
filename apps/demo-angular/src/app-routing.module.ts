@@ -10,6 +10,7 @@ const routes: Routes = [
 	{ path: 'expo-contacts-nativescript-plugin', loadChildren: () => import('./plugin-demos/expo-contacts-nativescript-plugin.module').then((m) => m.ExpoContactsNativescriptPluginModule) },
 	{ path: 'expo-nativescript-adapter', loadChildren: () => import('./plugin-demos/expo-nativescript-adapter.module').then((m) => m.ExpoNativescriptAdapterModule) },
 	{ path: 'expo-nativescript-react-native-shim', loadChildren: () => import('./plugin-demos/expo-nativescript-react-native-shim.module').then((m) => m.ExpoNativescriptReactNativeShimModule) },
+	{ path: 'expo-permissions', loadChildren: () => import('./plugin-demos/expo-permissions.module').then((m) => m.ExpoPermissionsModule) },
 	{ path: 'expo-permissions-nativescript-plugin', loadChildren: () => import('./plugin-demos/expo-permissions-nativescript-plugin.module').then((m) => m.ExpoPermissionsNativescriptPluginModule) },
 ];
 

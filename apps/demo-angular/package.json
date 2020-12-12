@@ -23,7 +23,8 @@
 		"@nativescript-community/expo-nativescript-adapter": "file:../../dist/packages/expo-nativescript-adapter",
 		"@nativescript-community/expo-permissions-nativescript-plugin": "file:../../dist/packages/expo-permissions-nativescript-plugin",
 		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../dist/packages/expo-contacts-nativescript-plugin",
-		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../dist/packages/expo-nativescript-react-native-shim"
+		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../dist/packages/expo-nativescript-react-native-shim",
+		"@nativescript-community/expo-permissions": "file:../../dist/packages/expo-permissions"
 	},
 	"devDependencies": {
 		"@angular/compiler-cli": "file:../../node_modules/@angular/compiler-cli",

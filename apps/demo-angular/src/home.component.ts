@@ -16,6 +16,9 @@ export class HomeComponent {
 			name: 'expo-nativescript-react-native-shim',
 		},
 		{
+			name: 'expo-permissions',
+		},
+		{
 			name: 'expo-permissions-nativescript-plugin',
 		},
 	];

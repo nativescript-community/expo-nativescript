@@ -14,7 +14,8 @@
 		"unimodules-file-system-interface": "file:../../node_modules/unimodules-file-system-interface",
 		"unimodules-permissions-interface": "file:../../node_modules/unimodules-permissions-interface",
 		"@nativescript-community/expo-contacts-nativescript-plugin": "file:../../packages/expo-contacts-nativescript-plugin",
-		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../packages/expo-nativescript-react-native-shim"
+		"@nativescript-community/expo-nativescript-react-native-shim": "file:../../packages/expo-nativescript-react-native-shim",
+		"@nativescript-community/expo-permissions": "file:../../packages/expo-permissions"
 	},
 	"devDependencies": {
 		"@nativescript/android": "7.0.1",

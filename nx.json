@@ -37,6 +37,9 @@
 		},
 		"expo-nativescript-react-native-shim": {
 			"tags": []
+		},
+		"expo-permissions": {
+			"tags": []
 		}
 	},
 	"workspaceLayout": {

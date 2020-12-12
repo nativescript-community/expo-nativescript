@@ -105,7 +105,7 @@
 					"builder": "@nrwl/workspace:run-commands",
 					"outputs": ["dist/packages"],
 					"options": {
-						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all", "nx run expo-contacts-nativescript-plugin:build.all", "nx run expo-nativescript-react-native-shim:build.all"],
+						"commands": ["nx run expo-nativescript-adapter:build.all", "nx run expo-permissions-nativescript-plugin:build.all", "nx run expo-contacts-nativescript-plugin:build.all", "nx run expo-nativescript-react-native-shim:build.all", "nx run expo-permissions:build.all"],
 						"parallel": false
 					}
 				},
@@ -306,6 +306,49 @@
 					"outputs": ["dist/packages"],
 					"options": {
 						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-nativescript-react-native-shim"],
+						"parallel": false
+					}
+				}
+			}
+		},
+		"expo-permissions": {
+			"root": "packages/expo-permissions",
+			"sourceRoot": "packages/expo-permissions",
+			"projectType": "library",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"options": {
+						"outputPath": "dist/packages/expo-permissions",
+						"tsConfig": "packages/expo-permissions/tsconfig.json",
+						"packageJson": "packages/expo-permissions/package.json",
+						"main": "packages/expo-permissions/index.ts",
+						"assets": [
+							"packages/expo-permissions/*.md",
+							"packages/expo-permissions/index.d.ts",
+							"LICENSE",
+							{
+								"glob": "**/*",
+								"input": "packages/expo-permissions/platforms/",
+								"output": "./platforms/"
+							}
+						]
+					}
+				},
+				"build.all": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx run expo-permissions:build", "node tools/scripts/build-finish.ts expo-permissions"],
+						"parallel": false
+					}
+				},
+				"focus": {
+					"builder": "@nrwl/workspace:run-commands",
+					"outputs": ["dist/packages"],
+					"options": {
+						"commands": ["nx g @nativescript/plugin-tools:focus-packages expo-permissions"],
 						"parallel": false
 					}
 				}

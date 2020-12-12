@@ -109,6 +109,13 @@ module.exports = {
 					description: '@nativescript-community/expo-nativescript-react-native-shim: Build',
 				},
 			},
+			// @nativescript-community/expo-permissions
+			'expo-permissions': {
+				build: {
+					script: 'nx run expo-permissions:build.all',
+					description: '@nativescript-community/expo-permissions: Build',
+				},
+			},
 			'build-all': {
 				script: 'nx run all:build',
 				description: 'Build all packages',
@@ -134,6 +141,10 @@ module.exports = {
 			'expo-nativescript-react-native-shim': {
 				script: 'nx run expo-nativescript-react-native-shim:focus',
 				description: 'Focus on @nativescript-community/expo-nativescript-react-native-shim',
+			},
+			'expo-permissions': {
+				script: 'nx run expo-permissions:focus',
+				description: 'Focus on @nativescript-community/expo-permissions',
 			},
 			reset: {
 				script: 'nx run all:focus',
