@@ -8,7 +8,17 @@
 
 ### 🐛 Bug fixes
 
-## 10.0.0 — 2020-11-17
+## 10.0.0 (`@nativescript-community/expo-permissions`) — 2020-12-12
+
+### 🛠 Breaking changes
+
+Remove all but the native Android implementation, and relocate that to live under a new `platforms` directory.
+
+NativeScript Expo users will install the native Android implementation from this fork (`@nativescript-community/expo-permissions`), but the native iOS implementation, and the JS build, will continue to come from the original `expo-permissions`.
+
+We'll align the major version of `@nativescript-community/expo-permissions` with that of the corresponding `expo-permissions` build. It may well be that `expo-permissions` updates at some point to version 11 without having changed the Android implementation at all, though, so in such case, `@nativescript-community/expo-permissions@10.0.0` would be compatible with both `expo-permissions@10.0.0` and `expo-permissions@11.0.0`. It's not an ideal versioning system, but there's always tradeoffs!
+
+## 10.0.0 (`expo-permissions`) — 2020-11-17
 
 ### 🛠 Breaking changes
 

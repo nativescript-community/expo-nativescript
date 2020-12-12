@@ -1,28 +1,16 @@
 {
 	"name": "@nativescript-community/expo-permissions",
-	"version": "10.0.0",
+	"version": "11.0.0",
 	"description": "A slight fork of expo-permissions to decouple the Android implementation from React Native. Allows you prompt for various permissions to access device sensors, personal data, etc.",
-	"main": "build/index.js",
-	"types": "build/index.d.ts",
-	"sideEffects": false,
-	"scripts": {
-	  "build": "expo-module build",
-	  "clean": "expo-module clean",
-	  "lint": "expo-module lint",
-	  "test": "expo-module test",
-	  "prepare": "expo-module prepare",
-	  "prepublishOnly": "expo-module prepublishOnly",
-	  "expo-module": "expo-module"
-	},
 	"nativescript": {
-		"platforms": {
-			"ios": "6.0.0",
-			"android": "6.0.0"
-		}
+        "platforms": {
+            "ios": "7.0.6",
+            "android": "7.0.1"
+        }
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/NativeScript/plugins.git"
+		"url": "https://github.com/nativescript-community/expo-nativescript.git"
 	},
 	"keywords": [
 		"react-native",
@@ -37,29 +25,24 @@
 	"author": "650 Industries, Inc.",
 	"contributors": [
 		{
-			"name": "Jamie Birch"
+			"name": "Jamie Birch",
+			"email": "14055146+shirakaba@users.noreply.github.com"
 		}
 	],
 	"bugs": {
-		"url": "https://github.com/NativeScript/plugins/issues"
+		"url": "https://github.com/nativescript-community/expo-nativescript"
 	},
 	"license": "MIT",
-	"homepage": "https://docs.expo.io/versions/latest/sdk/permissions/",
-	"jest": {
-  	    "preset": "expo-module-scripts/ios"
-	},
+	"homepage": "https://github.com/nativescript-community/expo-nativescript/README.md",
 	"unimodulePeerDependencies": {
 		"@unimodules/core": "*",
 		"unimodules-permissions-interface": "*"
 	},
-	"peerDependencies": {
-		"react": "*",
-		"react-native": "*"
-	},
-	"devDependencies": {
-		"@testing-library/react-hooks": "^3.3.0",
-		"expo-module-scripts": "~1.2.0"
-	},
+    "peerDependencies": {
+        "@nativescript-community/expo-nativescript-adapter": "*",
+        "@unimodules/core": "*",
+        "unimodules-permissions-interface": "*"
+    },
 	"readmeFilename": "README.md",
 	"bootstrapper": "@nativescript/plugin-seed"
 }
