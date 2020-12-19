@@ -198,6 +198,11 @@
 								"glob": "**/*",
 								"input": "packages/expo-permissions-nativescript-plugin/typings/",
 								"output": "./typings/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-permissions-nativescript-plugin/hooks/",
+								"output": "./hooks/"
 							}
 						]
 					}
@@ -246,6 +251,11 @@
 								"glob": "**/*",
 								"input": "packages/expo-contacts-nativescript-plugin/typings/",
 								"output": "./typings/"
+							},
+							{
+								"glob": "**/*",
+								"input": "packages/expo-contacts-nativescript-plugin/hooks/",
+								"output": "./hooks/"
 							}
 						]
 					}
