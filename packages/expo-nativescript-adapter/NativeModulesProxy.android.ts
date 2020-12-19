@@ -2,7 +2,7 @@ import { UMNativeModulesProxy } from './UMNativeModulesProxy';
 import { ProxyNativeModule } from './NativeModulesProxy.types';
 import { exportedMethodsKey, modulesConstantsKey } from "./UMNativeModulesProxyCommon";
 import { NativeScriptModuleRegistryProvider } from './android-adapter/NativeScriptModuleRegistryProvider.android';
-import { NativeScriptContext } from './NativeScriptContext.android';
+import { NativeScriptContext } from './android-adapter/NativeScriptContext.android';
 
 const umNativeModulesProxy = new UMNativeModulesProxy(
   /**

@@ -22,7 +22,7 @@ import type {
     PermissionsListener,
     ActivityProvider,
 } from "./android-adapter/nativeTypeAliases.android";
-import { NativeScriptContext } from "./NativeScriptContext.android";
+import { NativeScriptContext } from "./android-adapter/NativeScriptContext.android";
 
 // class ExpoFlutterAdapterPlugin {
 //     private static sRegistrar: Registrar;

@@ -1,4 +1,4 @@
-/// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
+/// <reference path="../typings/java!android-17-core-5.5.1.d.ts" />
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -21,7 +21,7 @@ import type {
     PermissionsManager,
     PermissionsListener,
     ActivityProvider,
-} from "./android-adapter/nativeTypeAliases.android";
+} from "./nativeTypeAliases.android";
 
 /**
  * Stub for now.
