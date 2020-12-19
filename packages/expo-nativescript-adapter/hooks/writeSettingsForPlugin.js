@@ -10,10 +10,7 @@ const writeSettings = require("./writeSettings");
  * @param {RegExp} args.hookName – The name of the hook that's running.
  */
 module.exports = function writeSettingsForPlugin(args){
-    const moduleName = args.moduleName;
-    const platformsDir = args.platformsDir;
-    const mode = args.mode;
-    const hookName = args.hookName;
+    const { moduleName, platformsDir, mode, hookName } = args;
     const packageName = ":unimodules-core";
 
     writeSettings({
