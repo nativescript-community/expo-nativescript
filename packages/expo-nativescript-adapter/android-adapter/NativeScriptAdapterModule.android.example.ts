@@ -1,4 +1,4 @@
-/// <reference path="./typings/java!android-17-core-5.5.1.d.ts" />
+/// <reference path="../typings/java!android-17-core-5.5.1.d.ts" />
 import type {
     ExportedModule,
     ModuleRegistry,
@@ -21,8 +21,8 @@ import type {
     PermissionsManager,
     PermissionsListener,
     ActivityProvider,
-} from "./android-adapter/nativeTypeAliases.android";
-import { NativeScriptContext } from "./android-adapter/NativeScriptContext.android";
+} from "./nativeTypeAliases.android";
+import { NativeScriptContext } from "./NativeScriptContext.android";
 
 // class ExpoFlutterAdapterPlugin {
 //     private static sRegistrar: Registrar;
@@ -50,6 +50,10 @@ class NativeScriptRegistrar {
 
 }
 
+/**
+ * This is a stub implementation of ExpoFlutterAdapterModule to see how they approached it. In practice, however, I think we may take the React Native
+ * approach instead (which is what all the other files in the android-adapter folder arose from).
+ */
 @NativeClass
 class ExpoNativeScriptAdapterModule extends java.lang.Object implements InternalModule, EventEmitter, UIManager, PermissionsManager, ActivityProvider
 {
