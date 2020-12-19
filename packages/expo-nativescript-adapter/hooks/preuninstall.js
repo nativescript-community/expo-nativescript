@@ -2,7 +2,7 @@ const path = require("path");
 const pluginDir = path.dirname(__dirname);
 const hook = require('@nativescript/hook')(pluginDir);
 const fs = require("fs");
-const writeSettings = require("./writeSettings");
+const writeSettingsForPlugin = require("./writeSettingsForPlugin");
 
 /**
  * By calling this, each entry specified in the `nativescript.hooks` field in this
@@ -15,19 +15,15 @@ const writeSettings = require("./writeSettings");
 hook.preuninstall();
 
 const moduleName = "@nativescript-community/expo-nativescript-adapter";
-const packageName = ":unimodules-core";
 const nativeScriptAppRoot = hook.findProjectDir();
 const platformsDir = path.resolve(nativeScriptAppRoot, "platforms");
 const androidDir = path.resolve(platformsDir, "android");
 if(fs.existsSync(androidDir)){
-    writeSettings({
+    writeSettingsForPlugin({
+        moduleName,
         platformsDir,
         mode: "clean",
-        logLabel: `[${moduleName}] preuninstall hook: `,
-        moduleLabel: moduleName,
-        packageLabel: `${packageName}`,
-        matchExp: /(\/\*\* ':unimodules-core' injected support START \*\*\/).*(\/\*\* ':unimodules-core' injected support END \*\*\/)/s,
-        injectedBlock: "",
+        hookName: "preuninstall",
     });
     try {
         fs.unlinkSync(path.resolve(platformsDir, "package.json"));

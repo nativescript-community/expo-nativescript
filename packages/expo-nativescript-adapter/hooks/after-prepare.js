@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const writeSettings = require("./writeSettings");
+const writeSettingsForPlugin = require("./writeSettingsForPlugin");
 
 /**
  * hook.findProjectDir() was returning undefined for this hook, but luckily we get passed hookArgs to after-prepare.
@@ -25,24 +25,14 @@ module.exports = function (hookArgs) {
     }
 
     const moduleName = "@nativescript-community/expo-nativescript-adapter";
-    const packageName = ":unimodules-core";
     const platformsDir = hookArgs.projectData.platformsDir;
     const androidDir = path.resolve(platformsDir, "android");
     if(fs.existsSync(androidDir)){
-        writeSettings({
+        writeSettingsForPlugin({
+            moduleName,
             platformsDir,
             mode: "inject",
-            logLabel: `[${moduleName}] after-prepare hook: `,
-            moduleLabel: moduleName,
-            packageLabel: `${packageName}`,
-            matchExp: /(\/\*\* ':unimodules-core' injected support START \*\*\/).*(\/\*\* ':unimodules-core' injected support END \*\*\/)/s,
-            injectedBlock: [
-                `/** '${packageName}' injected support START **/`,
-                `// Everything from here until the corresponding END comment will be subject to text replacement upon '${moduleName}' plugin installation.`,
-                `include '${packageName}'`,
-                `project('${packageName}').projectDir = new File(rootProject.projectDir, '../../node_modules/@unimodules/core/android')`,
-                `/** '${packageName}' injected support END **/`,
-            ].join("\n")
+            hookName: "after-prepare",
         });
         try {
             fs.writeFileSync(

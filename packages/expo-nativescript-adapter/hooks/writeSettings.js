@@ -14,7 +14,7 @@ const path = require("path");
  * @param {"inject"|"clean"} args.mode – Whether to inject the settings ("inject"), or clean them ("clean"), from settings.gradle.
  * @param {string|undefined} args.logLabel – The identifying prefix to give any log messages written out.
  * @param {string} args.moduleLabel – The label by which to refer to the npm module that this hook is run by, for logging purposes.
- * @param {string} args.packageLabel – The label by which to refer to the package that this hook is concerned with injecting, for logging purposes (e.g. ":unimodules-core").
+ * @param {string} args.packageLabel – The label by which to refer to the Java/Kotlin package that this hook is concerned with injecting, for logging purposes (e.g. ":unimodules-core").
  * @param {RegExp} args.matchExp – The Regex expression to match.
  * @param {string} args.injectedBlock – The contents to inject.
  */
