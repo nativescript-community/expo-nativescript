@@ -9,25 +9,6 @@ You can use this file to perform app-level initialization, but the primary
 purpose of the file is to pass control to the app’s first module.
 */
 
-//@ts-ignore
-console.log("org.unimodules.core:", org.unimodules.core);
-//@ts-ignore
-console.log("expo.modules.permissions:", expo.modules.permissions);
-//@ts-ignore
-console.log("expo.modules.permissions.PermissionsService:", expo.modules.permissions.PermissionsService);
-//@ts-ignore
-console.log("expo.modules.permissions.PermissionsModule:", expo.modules.permissions.PermissionsModule);
-//@ts-ignore
-console.log("expo.modules.permissions.requesters:", expo.modules.permissions.requesters);
-//@ts-ignore
-console.log("expo.modules.permissions.requesters.LocationRequester:", expo.modules.permissions.requesters.LocationRequester);
-//@ts-ignore
-console.log("com.facebook.react.modules.core:", com.facebook.react.modules.core);
-//@ts-ignore
-console.log("com.facebook.react.modules.core.PermissionAwareActivity:", com.facebook.react.modules.core.PermissionAwareActivity);
-//@ts-ignore
-console.log("org.unimodules.core.BasePackage:", org.unimodules.core.BasePackage);
-
 import * as ReactNativeScript from 'react-nativescript';
 import { mainStackNavigator as AppContainer } from './components/Navigator';
 
