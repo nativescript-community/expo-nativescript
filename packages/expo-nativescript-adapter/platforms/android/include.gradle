@@ -15,73 +15,18 @@ project(':unimodules-permissions-interface').projectDir = new File(rootProject.p
 
 apply plugin: 'maven'
 
-/**
- * A copy-paste of the contents of:
- *   apply from: project(":unimodules-core").file("../unimodules-core.gradle")
- * ... But with the guard against non React Native projects removed.
- */
-class UnimodulesPlugin implements Plugin<Project> {
-    void apply(Project project) {
-        // Exclude '*/flutter/*' files if not compiling for Flutter
-        if (!(new File(project.rootProject.projectDir.parentFile, 'pubspec.yaml').exists())) {
-            project.android.sourceSets {
-                main {
-                    java {
-                        exclude '**/flutter/**'
-                    }
-                }
-            }
-        }
-
-        project.configurations.configureEach {
-            if (it.getName().startsWith('test') && project.file('./src/test').exists()) {
-                project.dependencies.add(it.getName(), project.project(':unimodules-test-core'))
-            }
-        }
-
-        project.ext.unimodule = {
-            String dep, Closure closure = null ->
-                Object dependency = null;
-
-                dependency = project.project(":$dep")
-                // if (new File(project.rootProject.projectDir.parentFile, 'package.json').exists()) {
-                //     // Parent directory of the android project has package.json -- probably React Native
-                //     dependency = project.project(":$dep")
-                // } else {
-                //     // There's no package.json and no pubspec.yaml
-                //     throw new GradleException(
-                //         "'unimodules-core.gradle' used in a project that seems not to be React Native project."
-                //     )
-                // }
-
-                String configurationName = project.configurations.findByName("implementation") ? "implementation" : "compile"
-
-                project.dependencies.add(configurationName, dependency, closure)
-        }
-    }
-}
-
+project(":unimodules-core").file("../unimodules-core.gradle")
 apply plugin: UnimodulesPlugin
 
 /* The `unimodule` approach used in react-native-adapter/android. */
-// dependencies {
-//   unimodule 'unimodules-core'
-//   /* Project with path ':unimodules-font-interface' could not be found in project ':app'. */
-// //   unimodule 'unimodules-font-interface'
-// //   unimodule 'unimodules-permissions-interface'
-// //   unimodule 'unimodules-image-loader-interface'
-// //   unimodule 'unimodules-app-loader'
-
-// //   implementation 'com.facebook.react:react-native:+'
-
-//   // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.50')}"
-// }
-
-/* The `compile project` approach as used in the expo-flutter-adapter example app. */
 dependencies {
-    compile project(':unimodules-core')
-    // compile project(':expo-permissions')
-    // compile project(':unimodules-permissions-interface')
-    // compile project(':expo-sensors')
-    // compile project(':unimodules-sensors-interface')
+  unimodule 'unimodules-core'
+//   unimodule 'unimodules-font-interface'
+//   unimodule 'unimodules-permissions-interface'
+//   unimodule 'unimodules-image-loader-interface'
+//   unimodule 'unimodules-app-loader'
+
+//   implementation 'com.facebook.react:react-native:+'
+
+  // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.50')}"
 }
