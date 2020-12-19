@@ -17,9 +17,9 @@ import type {
     NativeScriptApplicationContext,
     NativeScriptViewManager,
     NativeModule,
-} from "./android-adapter/nativeTypeAliases.android";
-import { NativeScriptModuleRegistryProvider } from "./android-adapter/NativeScriptModuleRegistryProvider.android";
-import { NativeScriptContext } from "./android-adapter/NativeScriptContext.android";
+} from "./android-specific/nativeTypeAliases.android";
+import { NativeScriptModuleRegistryProvider } from "./android-specific/NativeScriptModuleRegistryProvider.android";
+import { NativeScriptContext } from "./android-specific/NativeScriptContext.android";
 
 /**
  * @see NativeModulesProxy.java
