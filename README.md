@@ -2,6 +2,8 @@
 
 This is a monorepo of various libraries from the Expo ecosystem, adapted for use with NativeScript.
 
+It's in proof-of-concept stage right now. Expo Contacts (and Expo Permissions, which it depends upon) is working fully on iOS. Android support is blocked, however – see details in the `expo-nativescript-adapter` project.
+
 ```
 npm run setup
 npm start

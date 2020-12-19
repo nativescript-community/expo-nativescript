@@ -1,5 +1,16 @@
 # @nativescript-community/expo-permissions-nativescript-plugin
 
+## About
+
+This is the NativeScript implementation of the Expo SDK's [Permissions](https://docs.expo.io/versions/v39.0.0/sdk/permissions/) APIs.
+
+* For iOS, it installs the native iOS `expo-permissions` source as-is.
+* For Android, I've been unable to get the native Android `expo-permissions` source to compile (a complication of it being Kotlin-based), so it installs the native Android source from our fork, `@nativescript-community/expo-permissions`. However, even with that approach, I've been unable to get things working, so summarily Android support is not working for now.
+
+It exposes the very same cross-platform TypeScript APIs as `expo-permissions` does – this was achieved largely by copy-pasting the TypeScript source files from `expo-permissions`.
+
+## Installation
+
 ```sh
 npm install --save @unimodules/core expo-permissions unimodules-permissions-interface
 ns plugin add @nativescript-community/expo-nativescript-adapter

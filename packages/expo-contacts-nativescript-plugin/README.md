@@ -1,7 +1,20 @@
 # @nativescript-community/expo-contacts-nativescript-plugin
 
+## About
+
+This is the NativeScript implementation of the Expo SDK's [Contacts](https://docs.expo.io/versions/v39.0.0/sdk/contacts/) APIs.
+
+* For iOS, it installs the native iOS `expo-contacts` source as-is.
+* For Android, there is no support, as we're blocked on getting its dependency, `expo-permissions`, to work for Android.
+
+It exposes the very same cross-platform TypeScript APIs as `expo-contacts` does – this was achieved largely by copy-pasting the TypeScript source files from `expo-contacts`.
+
+## Installation
+
+This depends upon `expo-permissions`, so these instructions are effectively a union of all the dependencies for this and `expo-permissions`.
+
 ```sh
-npm install --save @unimodules/core expo-permissions unimodules-permissions-interface unimodules-file-system-interface expo-contacts
+npm install --save @unimodules/core @nativescript-community/expo-nativescript-react-native-shim expo-permissions @nativescript-community/expo-permissions unimodules-permissions-interface unimodules-file-system-interface expo-contacts
 ns plugin add @nativescript-community/expo-nativescript-adapter
 ns plugin add @nativescript-community/expo-permissions-nativescript-plugin
 ns plugin add @nativescript-community/expo-contacts-nativescript-plugin
