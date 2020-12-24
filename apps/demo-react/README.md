@@ -4,9 +4,9 @@
 
 ### Prerequisites
 
-1. Ensure that you have followed the initial monorepo setup steps (`npm run setup && npm run start` in the root directory of the monorepo).
-2. Ensure you [have your environment set up for NativeScript development](https://react-nativescript.netlify.app/docs/getting-started/installation)
-3. Run the following command to build (if not yet built) and run the iOS app:
+1. Ensure that you have followed the initial monorepo setup steps (`npm run setup` and `npm start`, selecting `@nativescript-community.build-all`, in the root directory of the monorepo).
+2. Ensure you [have your environment set up for NativeScript development](https://react-nativescript.netlify.app/docs/getting-started/installation).
+3. Run one of the following commands to build (if not yet built) and run the iOS app, depending on where you'd prefer your terminal to be focused:
 
 ### If your terminal is in `demo-react`
 
