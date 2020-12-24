@@ -6,7 +6,7 @@ import type { ItemEventData } from "@nativescript/core";
 import { ListView } from "react-nativescript";
 import { Dialogs } from "@nativescript/core";
 import { createStyleSheet } from "../util/createStyleSheet";
-import { isAvailableAsync, getPermissionsAsync, requestPermissionsAsync, addContactAsync, removeContactAsync, ContactTypes, getContactsAsync, Fields, ContactResponse, PermissionResponse } from "@nativescript-community/expo-contacts-nativescript-plugin";
+import { isAvailableAsync, getPermissionsAsync, requestPermissionsAsync, addContactAsync, removeContactAsync, ContactTypes, getContactsAsync, getContactByIdAsync, Fields, ContactResponse, PermissionResponse, Contact } from "@nativescript-community/expo-contacts-nativescript-plugin";
 
 type ContactsScreenProps = {
     route: RouteProp<MainStackParamList, "contacts">,
@@ -61,7 +61,20 @@ const items: MyItem[] = [
         },
     },
     {
-        label: `Add a contact (constant UUID, so only works once)`,
+        label: `Get all contacts (print first one)`,
+        callback: () => {
+            getContactsAsync({
+                fields: [Fields.Emails]
+            })
+            .then((response: ContactResponse) => {
+                console.log(`getContactsAsync() resolved: ${response}`);
+                Dialogs.alert(`getContactsAsync() first contact: ${JSON.stringify(response.data[0], null, 4)}`);
+            })
+            .catch(errorHandler);
+        },
+    },
+    {
+        label: `Add dummy contact (constant; works once)`,
         callback: () => {
             addContactAsync({
                 id: dummyContactId,
@@ -76,7 +89,7 @@ const items: MyItem[] = [
         },
     },
     {
-        label: `Remove that same contact`,
+        label: `Remove the dummy contact`,
         callback: () => {
             removeContactAsync(dummyContactId)
             .then((response: string) => {
@@ -87,14 +100,15 @@ const items: MyItem[] = [
         },
     },
     {
-        label: `Get contacts`,
+        label: `Get the dummy contact`,
         callback: () => {
-            getContactsAsync({
-                fields: [Fields.Emails]
-            })
-            .then((response: ContactResponse) => {
+            getContactByIdAsync(
+                dummyContactId,
+                [Fields.Emails]
+            )
+            .then((response: Contact) => {
                 console.log(`getContactsAsync() resolved: ${response}`);
-                Dialogs.alert(`getContactsAsync() first contact: ${JSON.stringify(response.data[0], null, 4)}`);
+                Dialogs.alert(`getContactsAsync() first contact: ${JSON.stringify(response, null, 4)}`);
             })
             .catch(errorHandler);
         },
@@ -125,7 +139,7 @@ export function Contacts({ navigation }: ContactsScreenProps) {
 
 const styles = createStyleSheet({
     label: {
-        fontSize: 22,
+        fontSize: 14,
         paddingLeft: 24,
         paddingRight: 24,
         paddingTop: 8,
