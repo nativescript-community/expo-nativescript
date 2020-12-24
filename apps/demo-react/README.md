@@ -23,6 +23,8 @@ And if you then receive an error like this:
 
 ... It's a pending problem with NativeScript supporting Xcode 12.3. Once `platforms/internal/nativescript-build.xcconfig` has been generated, please add `VALIDATE_WORKSPACE = YES` to it as detailed in [NativeScript issue 9097](https://github.com/NativeScript/NativeScript/issues/9097). Once the [NativeScript iOS V8 runtime PR 92](https://github.com/NativeScript/ns-v8ios-runtime/pull/92/files) has been merged, that change will be handled for you automatically.
 
+Until that PR lands, you will need to restore this patch any time you run `ns run clean`, of course!
+
 #### Android
 
 Android support is incomplete, so the equivalent `ns run android` command won't be of much use right now.
@@ -43,6 +45,8 @@ And if you then receive an error like this:
 > Unable to apply changes on device: F5922E41-5D17-4E9F-A2F8-ADBCB4F11542. Error is: Command xcodebuild failed with exit code 65.
 
 ... It's a pending problem with NativeScript supporting Xcode 12.3. Once `platforms/internal/nativescript-build.xcconfig` has been generated, please add `VALIDATE_WORKSPACE = YES` to it as detailed in [NativeScript issue 9097](https://github.com/NativeScript/NativeScript/issues/9097). Once the [NativeScript iOS V8 runtime PR 92](https://github.com/NativeScript/ns-v8ios-runtime/pull/92/files) has been merged, that change will be handled for you automatically.
+
+Until that PR lands, you will need to restore this patch any time you run `ns run clean`, of course!
 
 #### Android
 
