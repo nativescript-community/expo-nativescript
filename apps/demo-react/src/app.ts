@@ -19,7 +19,7 @@ Do not place any code after the application has been started as it will not
 be executed on iOS.
 */
 
-/* BEGIN NOTE TO SELF: How I got expo.modules.permissions (though apparently none of its constituen Kotlin files) to compile for Android.
+/* BEGIN NOTE TO SELF: How I got expo.modules.permissions (though apparently none of its constituent Kotlin files) to compile for Android.
  * I used @nativescript-community/expo-permissions for the Android implementation
  * and @nativescript-community/expo-permissions-nativescript-plugin + expo-permissions to provide both the iOS implementation and
  * cross-platform TS implementation.

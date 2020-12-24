@@ -6,6 +6,7 @@ import type { ItemEventData } from "@nativescript/core";
 import { ListView } from "react-nativescript";
 import { Dialogs } from "@nativescript/core";
 import { createStyleSheet } from "../util/createStyleSheet";
+import { isAvailableAsync, getPermissionsAsync, requestPermissionsAsync, addContactAsync, ContactTypes, getContactsAsync, Fields, ContactResponse, PermissionResponse } from "@nativescript-community/expo-contacts-nativescript-plugin";
 
 type ContactsScreenProps = {
     route: RouteProp<MainStackParamList, "contacts">,

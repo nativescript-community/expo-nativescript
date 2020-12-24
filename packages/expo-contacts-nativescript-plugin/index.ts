@@ -1,3 +1,8 @@
+/**
+ * I'd prefer this file to be called Contacts.ts, as in the expo-contacts package itself, but the nx workspace
+ * seems to override my "main" field to "index.js" and my "typings" field to "index.d.ts" upon build.
+ * @see https://github.com/expo/expo/blob/master/packages/expo-contacts/src/Contacts.ts
+ */
 import { UnavailabilityError } from "@nativescript-community/expo-nativescript-adapter";
 import { isIOS } from "@nativescript/core";
 import { PermissionResponse, PermissionStatus } from 'unimodules-permissions-interface';

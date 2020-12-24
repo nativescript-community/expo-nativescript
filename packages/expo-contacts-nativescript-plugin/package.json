@@ -2,8 +2,8 @@
     "name": "@nativescript-community/expo-contacts-nativescript-plugin",
     "version": "1.0.0",
     "description": "Expo Contacts, adapted for NativeScript.",
-    "main": "Contacts",
-    "typings": "Contacts.d.ts",
+    "main": "index.js",
+    "typings": "index.d.ts",
     "nativescript": {
         "platforms": {
             "ios": "7.0.6",
