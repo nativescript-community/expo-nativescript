@@ -1,5 +1,9 @@
 # React demo
 
+<p align="center">
+    <img src="github/examples.png" width="300">
+</p>
+
 ## Running the app
 
 ### Prerequisites
