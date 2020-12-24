@@ -3,7 +3,7 @@
 import { UMNativeModulesProxyBase, methodInfoArgumentsCountKey, methodInfoNameKey, methodInfoKeyKey, MethodInfo, modulesConstantsKey, viewManagersNamesKey, exportedMethodsKey } from "./UMNativeModulesProxyCommon";
 import type { ExpoEvent } from "./UMNativeModulesProxyCommon";
 
-class UMNativeModulesProxy extends UMNativeModulesProxyBase {
+export class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     /* TODO */
     // private readonly viewManagerClassesRegistry: UMViewManagerAdapterClassesRegistry = UMViewManagerAdapterClassesRegistry.alloc().init();
     // private readonly provider: UMModuleRegistryProvider = UMModuleRegistryProvider.alloc().init();

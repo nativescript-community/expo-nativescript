@@ -25,7 +25,7 @@ import { NativeScriptContext } from "./android-specific/NativeScriptContext.andr
  * @see NativeModulesProxy.java
  * @see expo-flutter-adapter.java
  */
-class UMNativeModulesProxy extends UMNativeModulesProxyBase {
+export class UMNativeModulesProxy extends UMNativeModulesProxyBase {
     /* TODO */
     // private readonly viewManagerClassesRegistry: UMViewManagerAdapterClassesRegistry = UMViewManagerAdapterClassesRegistry.alloc().init();
     private readonly moduleRegistry: org.unimodules.core.ModuleRegistry;
