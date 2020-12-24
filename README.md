@@ -26,11 +26,19 @@ And as Android support still isn't working even with best-effort hacks, I'll onl
 
 ## Monorepo setup
 
-Run these two commands. The necessary installation will likely take several minutes:
+Run these commands:
 
-```
+```sh
+# Installs all dependencies (will likely take several minutes):
 npm run setup
+
+# Builds the packages that the demo apps will use:
 npm start
+# Select: @nativescript-community.build-all
+
+# Runs the React demo on an iOS simulator (or device, if connected):
+npm start
+# Select: apps.demo-react.ios
 ```
 
 # What are these packages?
