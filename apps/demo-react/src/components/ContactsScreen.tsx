@@ -74,12 +74,14 @@ const items: MyItem[] = [
         },
     },
     {
-        label: `Add dummy contact (constant; works once)`,
+        label: `Add dummy contact`,
         callback: () => {
             addContactAsync({
                 id: dummyContactId,
                 contactType: ContactTypes.Company,
-                name: "123 Fake Street",
+                name: "Daddy Pig",
+                firstName: "Daddy",
+                lastName: "Pig",
             })
             .then((response: string) => {
                 console.log(`addContactAsync() resolved: ${response}`);
@@ -88,31 +90,41 @@ const items: MyItem[] = [
             .catch(errorHandler);
         },
     },
-    {
-        label: `Remove the dummy contact`,
-        callback: () => {
-            removeContactAsync(dummyContactId)
-            .then((response: string) => {
-                console.log(`removeContactAsync() resolved: ${response}`);
-                Dialogs.alert(`removeContactAsync() resolved: ${response}`);
-            })
-            .catch(errorHandler);
-        },
-    },
-    {
-        label: `Get the dummy contact`,
-        callback: () => {
-            getContactByIdAsync(
-                dummyContactId,
-                [Fields.Emails]
-            )
-            .then((response: Contact) => {
-                console.log(`getContactsAsync() resolved: ${response}`);
-                Dialogs.alert(`getContactsAsync() first contact: ${JSON.stringify(response, null, 4)}`);
-            })
-            .catch(errorHandler);
-        },
-    },
+    /** 
+      * This isn't working as I'd expected, so skipping this test for now.
+      * I'd expected it to get the contact based on the same UUID you'd added earlier, but I think instead it's expecting
+      * the ID string returned by iOS upon initially adding the contact. Would need to be more familiar with the Contacts API.
+      */
+    // {
+    //     label: `Get the dummy contact`,
+    //     callback: () => {
+    //         getContactByIdAsync(
+    //             dummyContactId,
+    //             [Fields.Emails]
+    //         )
+    //         .then((response: Contact) => {
+    //             console.log(`getContactByIdAsync() resolved: ${response}`);
+    //             Dialogs.alert(`getContactByIdAsync() first contact: ${JSON.stringify(response, null, 4)}`);
+    //         })
+    //         .catch(errorHandler);
+    //     },
+    // },
+    /** 
+      * Also isn't working as I'd expected, so skipping this test for now.
+      * I'd expected it to get the contact based on the same UUID you'd added earlier, but I think instead it's expecting
+      * the ID string returned by iOS upon initially adding the contact. Would need to be more familiar with the Contacts API.
+      */
+    // {
+    //     label: `Remove the dummy contact`,
+    //     callback: () => {
+    //         removeContactAsync(dummyContactId)
+    //         .then((response: string) => {
+    //             console.log(`removeContactAsync() resolved: ${response}`);
+    //             Dialogs.alert(`removeContactAsync() resolved: ${response}`);
+    //         })
+    //         .catch(errorHandler);
+    //     },
+    // },
 ];
 
 const cellFactory = (item: MyItem) => {
