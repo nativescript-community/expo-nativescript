@@ -14,15 +14,19 @@ For more information on this project (and particularly if you'd like to help –
     </a>
 </p>
 
-## ⚠️ Warnings
+## ⚠️ Before you start ⚠️
 
-It's in proof-of-concept stage right now. Expo <a href="https://docs.expo.io/versions/v39.0.0/sdk/contacts/">Contacts</a> (and Expo <a href="https://docs.expo.io/versions/v39.0.0/sdk/permissions/">Permissions</a>, which it depends upon) is working fully on iOS. Android support is blocked, however – [see details](packages/expo-nativescript-adapter/README.md) in the `expo-nativescript-adapter` project.
+Be warned: It's in proof-of-concept stage right now. Expo <a href="https://docs.expo.io/versions/v39.0.0/sdk/contacts/">Contacts</a> (and Expo <a href="https://docs.expo.io/versions/v39.0.0/sdk/permissions/">Permissions</a>, which it depends upon) is working fully on iOS. Android support is blocked, however – [see details](packages/expo-nativescript-adapter/README.md) in the `expo-nativescript-adapter` project.
 
 Please don't look too closely at [apps/demo](apps/demo) and [apps/demo-angular](apps/demo-angular), as I have only been developing with [demo-react](apps/demo-react). They're there only as templates to be filled in properly later.
 
 I hope at some point to simplify this monorepo by removing the packages [expo-permissions](packages/expo-permissions) and [expo-nativescript-react-native-shim](packages/expo-nativescript-react-native-shim), which only exist to support Android. But for now, we have to put up with them.
 
 And as Android support still isn't working even with best-effort hacks, I'll only be publishing [expo-nativescript-adapter](packages/expo-nativescript-adapter), [expo-permissions-nativescript-plugin](packages/expo-permissions-nativescript-plugin), and [expo-contacts-nativescript-plugin](packages/expo-contacts-nativescript-plugin) to npm for now.
+
+## Monorepo setup
+
+Run these two commands. The necessary installation will likely take several minutes:
 
 ```
 npm run setup
