@@ -6,11 +6,13 @@ This is a monorepo of various libraries from the [Expo ecosystem](https://docs.e
 
 ## Getting involved
 
-For more information on this project (and particularly if you'd like to help – especially so if it's for getting the Android side working), you can contact Jamie Birch on Twitter at [@LinguaBrowse](https://twitter.com/intent/follow?screen_name=LinguaBrowse), or on the [NativeScript Slack](https://app.slack.com/client/T0L97VCSY/CJ2B77CJ1) in the `#react` channel, or on the [NativeScript Discord](https://discord.com/channels/603595811204366337/606457751995940866), again in the `#react` channel.
+For more information on this project (and particularly if you'd like to help – especially so if it's for getting the Android side working), you can contact Jamie Birch on Twitter via [@LinguaBrowse](https://twitter.com/intent/follow?screen_name=LinguaBrowse), or on the [NativeScript Slack](https://app.slack.com/client/T0L97VCSY/CJ2B77CJ1) in the `#react` channel, or on the [NativeScript Discord](https://discord.com/channels/603595811204366337/606457751995940866), again in the `#react` channel.
 
-<a href="https://twitter.com/intent/follow?screen_name=LinguaBrowse">
-    <img src="https://img.shields.io/twitter/follow/LinguaBrowse.svg?style=social&logo=twitter"/>
-</a>
+<p align="center">
+    <a href="https://twitter.com/intent/follow?screen_name=LinguaBrowse">
+        <img src="https://img.shields.io/twitter/follow/LinguaBrowse.svg?style=social&logo=twitter"/>
+    </a>
+</p>
 
 ## ⚠️ Warnings
 
